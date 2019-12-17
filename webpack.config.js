@@ -26,7 +26,10 @@ Encore
     .addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
-
+    
+    // processes files ending in .scss or .sass
+    .enableSassLoader()
+    .addStyleEntry('css/app', './assets/scss/all.scss')
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
@@ -34,8 +37,7 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
-    // processes files ending in .scss or .sass
-    .enableSassLoader()
+
     /*
      * FEATURE CONFIG
      *
