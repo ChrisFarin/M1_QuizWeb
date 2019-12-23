@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/home/chris/Documents/GIT/M1_QuizWeb/src/Controller/TestController.php'|file_link(0) }}">src/Controller/TestController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/home/chris/Documents/GIT/M1_QuizWeb/templates/test/index.html.twig'|file_link(0) }}">templates/test/index.html.twig</a></code></li>
+    </ul>
+</div>
+<button class="button" type="button" data-toggle="example-dropdown">Toggle Dropdown</button>
+<div class="dropdown-pane" id="example-dropdown" data-dropdown data-auto-focus="true">
+  Example form in a dropdown.
+  <form>
+    <div class="grid-container">
+      <div class="grid-x grid-margin-x">
+        <div class="cell medium-6">
+          <label>Name
+            <input type="text" placeholder="Kirk, James T.">
+          </label>
+        </div>
+        <div class="cell medium-6">
+          <label>Rank
+            <input type="text" placeholder="Captain">
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<button class="button" type="button" data-toggle="example-dropdown-1">Hoverable Dropdown</button>
+<div class="dropdown-pane" id="example-dropdown-1" data-dropdown data-hover="true" data-hover-pane="true">
+  Just some junk that needs to be said. Or not. Your choice.
+</div>
+{% endblock %}
+

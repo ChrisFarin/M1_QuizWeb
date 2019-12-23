@@ -10,5 +10,19 @@
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
+//window.jQuery = $;
+//window.$ = $;
+//const foundation = require('foundation-sites');
+//import('jquery/dist/jquery.min.js');
+//import('foundation-sites/dist/js/foundation.min.js');
+//const test = import('./test.js');
+
+function prout() {
+  console.log('prout');
+  }
+prout();
+console.log(foundation);
+//$(document).foundation();
+
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
