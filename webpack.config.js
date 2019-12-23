@@ -26,7 +26,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
-    
+
     // processes files ending in .scss or .sass
     .enableSassLoader()
     .addStyleEntry('css/app', './assets/scss/all.scss')
@@ -57,8 +57,6 @@ Encore
         config.corejs = 3;
     })
 
-    // enables Sass/SCSS support
-    //.enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
