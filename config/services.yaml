@@ -19,6 +19,9 @@ services:
     App\Areas\External\:
         resource: '../src/Areas/External/*'
         exclude: '../src/Areas/External/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    App\Areas\User\:
+        resource: '../src/Areas/User/*'
+        exclude: '../src/Areas/User/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -29,6 +32,9 @@ services:
 
     App\Areas\External\Controller\:
         resource: '../src/Areas/External/Controller'
+        tags: ['controller.service_arguments']
+    App\Areas\User\Controller\:
+        resource: '../src/Areas/User/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
