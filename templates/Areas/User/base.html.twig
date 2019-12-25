@@ -2,21 +2,35 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
 
         {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{asset('build/css/app.css')}}"/>
-{% endblock %}
+             <link rel="stylesheet" type="text/css" href="{{asset('build/css/app.css')}}"/>
+        {% endblock %}
     </head>
     <body>
+        <header>
+
+            <div class="row align-justify header mar-bottom">
+                <div class="small-3 columns">
+                    <img src="{{asset('build/images/mysql.png')}}" title="my image" alt="My image">
+                </div>
+                <div class="small-6 columns">
+                    {% block connection %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </header>
+
+        {% block navbar %} {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
-
-      <script>
-      $(document).foundation();
-    </script>
-{% endblock %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
+            <script>
+               $(document).foundation();
+            </script>
+        {% endblock %}
     </body>
 </html>

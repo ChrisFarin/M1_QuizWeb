@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Areas\External\Controller;
+namespace App\Areas\User\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AuthController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -23,7 +23,7 @@ class AuthController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('Areas/External/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('Areas/User/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**

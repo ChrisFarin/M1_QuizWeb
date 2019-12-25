@@ -6,6 +6,10 @@
     margin-bottom:none;
 }
 
+.mar-bottom {
+    margin-bottom: $global-margin;
+}
+
 
 .centered {
     position:fixed;
@@ -15,7 +19,17 @@
 }
 
 .button,button {
-    background-color:$blue !important;
+    background-color:$primary-color !important;
     color:white;
     padding:$global-padding !important;
+}
+
+.table {
+    display:table;
+}
+.tr {
+    display:table-row;
+}
+.td {
+    display:table-cell;
 }

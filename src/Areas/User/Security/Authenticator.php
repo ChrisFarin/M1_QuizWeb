@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Areas\External\Security;
+namespace App\Areas\User\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -95,7 +95,7 @@ class Authenticator extends AbstractFormLoginAuthenticator implements PasswordAu
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('index_user'));
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

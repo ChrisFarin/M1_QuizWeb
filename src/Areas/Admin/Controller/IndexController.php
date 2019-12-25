@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Areas\User\Controller;
+namespace App\Areas\Admin\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,10 +9,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/User/index", name="index_user")
+     * @Route("/Admin/index", name="index_admin")
      */
     public function index(?UserInterface $user)
     {
-        return $this->render('Areas/User/index/index.html.twig', ['name' => $user->getUserName()]);
+        return $this->render('Areas/Admin/index/index.html.twig', ['name' => $user->getUserName()]);
     }
 }

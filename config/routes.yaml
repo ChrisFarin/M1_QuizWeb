@@ -1,6 +1,9 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-index_user:
-    path: /User/
-    controller: App\Areas\User\Controller\IndexController::index
+index_admin:
+    path: /Admin/
+    controller: App\Areas\Admin\Controller\IndexController::index
+app_login:
+    path: /
+    controller: App\Areas\User\Controller\AuthController::login

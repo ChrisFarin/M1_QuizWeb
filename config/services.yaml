@@ -16,9 +16,9 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
-    App\Areas\External\:
-        resource: '../src/Areas/External/*'
-        exclude: '../src/Areas/External/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    App\Areas\Admin\:
+        resource: '../src/Areas/Admin/*'
+        exclude: '../src/Areas/Admin/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
     App\Areas\User\:
         resource: '../src/Areas/User/*'
         exclude: '../src/Areas/User/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
@@ -30,8 +30,8 @@ services:
         #tags: ['controller.service_arguments']
 
 
-    App\Areas\External\Controller\:
-        resource: '../src/Areas/External/Controller'
+    App\Areas\Admin\Controller\:
+        resource: '../src/Areas/Admin/Controller'
         tags: ['controller.service_arguments']
     App\Areas\User\Controller\:
         resource: '../src/Areas/User/Controller'
