@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Areas\External\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
-use App\Security\Authenticator;
+use App\Areas\External\Form\RegistrationFormType;
+use App\Areas\External\Security\Authenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +46,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('Areas/External/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

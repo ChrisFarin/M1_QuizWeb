@@ -20,7 +20,7 @@ security:
             anonymous: lazy
             guard:
                 authenticators:
-                    - App\Security\Authenticator
+                    - App\Areas\External\Security\Authenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
