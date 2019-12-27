@@ -3,11 +3,6 @@
 {% block title %}Création quizz{% endblock %}
 
 {% block connection %}
-<!--
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
--->
 
     {% if app.user %}
         <div class="row align-right">
@@ -69,15 +64,14 @@
 {% block body %}
 <div class="row centered loginBlock">
     <div class="small-12 columns">
-        <h1>Inscription</h1>
+        <h1>Création d'un quizz</h1>
 
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.username) }}
-            {{ form_row(registrationForm.plainPassword) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(CreateQuizForm) }}
+            {{ form_row(CreateQuizForm.Nom) }}
+            {{ form_row(CreateQuizForm.Visible) }}
 
-            <button class="btn">Inscription</button>
-        {{ form_end(registrationForm) }}
+            <button class="btn">Créer</button>
+        {{ form_end(CreateQuizForm) }}
     </div>
 
 </div>
