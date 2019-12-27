@@ -3,6 +3,7 @@
 namespace App\Areas\User\Controller;
 
 use App\Entity\User;
+use App\Entity\Quiz;
 use App\Areas\User\Form\CreateQuizFormType;
 use App\Areas\User\Security\Authenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,14 +31,14 @@ class CreateQuizController extends AbstractController
             $quiz->setDate(getDate());
             //TODO MODIFIER//
             $quiz->setAuthor(new User());
-
+            // Peut être utiliser app.user
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($quiz);
             $entityManager->flush();
 
+            // Je sais pas vers quoi tu veux rediriger
+            //return $this->redirectToRoute(route:'questions');
 
-            return $this->redirectToRoute(route:'questions');
-            );
         }
 
         return $this->render('Areas/User/quiz/create.html.twig', [

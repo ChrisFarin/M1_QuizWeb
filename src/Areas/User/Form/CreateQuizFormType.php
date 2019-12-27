@@ -3,6 +3,7 @@
 namespace App\Areas\User\Form;
 
 use App\Entity\User;
+use App\Entity\Quiz;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -17,9 +18,10 @@ class CreateQuizFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom')
-            ->add('Visible', CheckboxType::class, [
+            ->add('Name')
+            ->add('isVisible', CheckboxType::class, [
                 'mapped' => true,
+
             ])
         ;
     }
