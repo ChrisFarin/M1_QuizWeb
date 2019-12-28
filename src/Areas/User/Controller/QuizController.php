@@ -71,6 +71,21 @@ class QuizController extends AbstractController
             );
         }
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $question->setEntitled($form->get('Entitled')->getData());
+            $question->setQuiz($quiz);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($question);
+            $entityManager->flush();
+
+            $response = $this->forward('App\Areas\User\Controller\QuizController::createQuestion', [
+                'id'  => $id,
+            ]);
+            return $response;
+
+        }
+
 
         return $this->render('Areas/User/quiz/createQuestion.html.twig', [
             'quizId'   => $id,
