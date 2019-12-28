@@ -1,67 +1,4 @@
-{% extends 'Areas/User/base.html.twig' %}
 
-{% block title %}Création quizz{% endblock %}
-
-{% block connection %}
-
-    {% if app.user %}
-        <div class="row align-right">
-            <div class="small-12 columns ">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <li>
-                        <a href="#">{{ app.user.username }}</a>
-                        <ul class="menu">
-                        <li><a href="/logout">Deconnexion</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
-
-    {% else %}
-
-    <form method="post">
-        <div class="row">
-            <div class="small-6 columns">
-                <label for="inputUsername">Nom de compte</label>
-                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-            </div>
-            <div class="small-6 columns">
-                <label for="inputPassword">Mot de passe</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" required>
-            </div>
-        </div>
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
-
-
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox ">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
-        <div class="row align-right">
-            <div class="small-12 columns">
-                <button class="" type="submit">
-                <a href="/register" class="button">Inscription</a>
-                    Connexion
-                </button>
-            </div>
-        </div>
-    </form>
-    {% endif %}
-{% endblock %}
-
-
-{% block body %}
 <div class="row loginBlock">
     <div class="small-12 columns">
         <h1>Création d'un quizz</h1>
@@ -75,4 +12,3 @@
     </div>
 
 </div>
-{% endblock %}

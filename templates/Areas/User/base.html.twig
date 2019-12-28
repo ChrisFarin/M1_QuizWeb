@@ -16,38 +16,50 @@
                     <img src="{{asset('build/images/logo.png')}}" title="my image" alt="My image">
                 </div>
                 <div class="small-6 columns">
-                    {% block connection %}
-
-                    {% endblock %}
+                  {% block connection %}
+                  {% endblock %}
                 </div>
             </div>
         </header>
 
 
-{% block navbar %}
-    <nav>
-        <div class="row">
+      {% block navbar %}
+        <nav>
+          <div class="row">
             <div class="small-12 columns">
-                <ul class="menu">
-                    <li class="is-active"><a href="#">Liste des quizz</a></li>
-                    {% if app and app.user %}
-                    <li><a href="#">Mes quizzs</a></li>
-                    <li><a href="/create">Créer un quizz</a></li>
-                    {% endif %}
-                    <li><a href="#">Three</a></li>
-                    <li><a href="#">Four</a></li>
-                </ul>
+              <ul class="tabs" data-tabs id="myTabs">
+                <li class="tabs-title is-active"><a href="#QuizList" aria-selected="true">Liste des quizs</a></li>
+                {% if app.user %}
+
+                  <li class="tabs-title" ><a href="#MyQuizs">Mes quizs</a></li>
+                  <li class="tabs-title" ><a href="#CreateQuiz">Créer un quiz</a></li>
+                {% endif %}
+              </ul>
             </div>
+        </nav>
+      {% endblock %}
+      {% block body %}
+      <div class="tabs-content" data-tabs-content="myTabs">
+        <div class="tabs-panel is-active" id="QuizList">
+          Page test
         </div>
-    </nav>
-{% endblock %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
-            <script>
-               $(document).foundation();
-            </script>
-        {% endblock %}
+        {% if app.user %}
+          <div class="tabs-panel" id="MyQuiz">
+
+          </div>
+          <div class="tabs-panel" id="CreateQuiz">
+            {{ render(url('app_create_quiz')) }}
+          </div>
+        {% endif %}
+      </div>
+      {% endblock %}
+
+      {% block javascripts %}
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
+          <script>
+             $(document).foundation();
+          </script>
+      {% endblock %}
     </body>
 </html>
