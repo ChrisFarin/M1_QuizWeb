@@ -16,8 +16,7 @@
                     <img src="{{asset('build/images/logo.png')}}" title="my image" alt="My image">
                 </div>
                 <div class="small-6 columns">
-                  {% block connection %}
-                  {% endblock %}
+                  {{ render(url('app_login')) }}
                 </div>
             </div>
         </header>

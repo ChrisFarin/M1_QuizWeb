@@ -1,13 +1,10 @@
-{% extends 'Areas/User/base.html.twig' %}
 
-{% block title %}Acceuil {% endblock %}
 
-{% block connection %}
-<!--
+
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
--->
+
     {% if app.user %}
         <div class="row align-right">
             <div class="small-12 columns ">
@@ -26,7 +23,7 @@
 
     {% else %}
 
-    <form method="post">
+    <form method="post" action="{{ url('app_login') }}">
         <div class="row">
             <div class="small-6 columns">
                 <label for="inputUsername">Nom de compte</label>
@@ -62,5 +59,4 @@
         </div>
     </form>
     {% endif %}
-{% endblock %}
 
