@@ -14,7 +14,7 @@ class Quiz
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="guid")
+     * @ORM\Column(type="integer")
      */
     private $id;
 

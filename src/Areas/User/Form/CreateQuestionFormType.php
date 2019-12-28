@@ -13,13 +13,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CreateQuestionFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Entitled')
+            ->add('Question')
+            ->add('Reponse1')
+            ->add('Reponse2')
+            ->add('Reponse3')
+            ->add('Reponse4') 
+            ->add('Bonne_reponse', ChoiceType::class,
+            array(
+                'choices' => array(
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                )
+            ))
         ;
     }
 

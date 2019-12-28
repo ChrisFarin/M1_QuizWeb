@@ -79,15 +79,10 @@ class QuizController extends AbstractController
             $entityManager->persist($question);
             $entityManager->flush();
 
-            $response = $this->forward('App\Areas\User\Controller\QuizController::createQuestion', [
-                'id'  => $id,
-            ]);
-            return $response;
-
         }
 
 
-        return $this->render('Areas/User/quiz/createQuestion.html.twig', [
+         return $this->render('Areas/User/quiz/createQuestion.html.twig', [
             'quizId'   => $id,
             'quizName' => $quiz->getName(),
             'CreateQuestionForm' => $form->createView(),
