@@ -13,13 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Security;
 
 class CreateQuizController extends AbstractController
 {
     /**
      * @Route("/create", name="app_create")
      */
-    public function register(Request $request): Response
+    public function register(Request $request, Security $security): Response
     {
         $quiz = new Quiz();
         $form = $this->createForm(CreateQuizFormType::class, $quiz);
@@ -28,9 +29,10 @@ class CreateQuizController extends AbstractController
             $quiz->setName($form->get('Name')->getData());
             $quiz->setIsVisible($form->get('isVisible')->getData());
             //TODO MODIFIER//
-            $quiz->setDate({{ "now"|date("m/d/Y") }});
+            $quiz->setDate(new \DateTime('now'));
             //TODO MODIFIER//
-            $quiz->setAuthor(new User());
+            $usr = $security->getUser();
+            $quiz->setAuthor($usr);
             // Peut être utiliser app.user
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($quiz);
