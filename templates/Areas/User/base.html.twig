@@ -13,7 +13,7 @@
 
             <div class="row align-justify header mar-bottom">
                 <div class="small-3 columns">
-                    <img src="{{asset('build/images/logo.png')}}" title="my image" alt="My image">
+                    <a href="{{ url('app_index')}}"><img src="{{asset('build/images/logo.png')}}" title="SYB" alt="SYB" ></a>
                 </div>
                 <div class="small-6 columns">
                   {{ render(url('app_login')) }}
@@ -21,9 +21,10 @@
             </div>
         </header>
 
-
-      {% block navbar %}
         <nav>
+      {% block navbar %}
+
+          {% if isRegistering is not defined or isRegistering is null or not isRegistering %}
           <div class="row">
             <div class="small-12 columns">
               <ul class="tabs" data-tabs id="myTabs">
@@ -35,9 +36,14 @@
                 {% endif %}
               </ul>
             </div>
-        </nav>
+            {% endif %}
+
       {% endblock %}
+          </nav>
       {% block body %}
+      
+      {% if isRegistering is not defined or isRegistering is null or not isRegistering %}
+
       <div class="tabs-content" data-tabs-content="myTabs">
         <div class="tabs-panel is-active" id="QuizList">
           Page test
@@ -51,6 +57,7 @@
           </div>
         {% endif %}
       </div>
+      {% endif %}
       {% endblock %}
 
       {% block javascripts %}

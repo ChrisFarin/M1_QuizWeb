@@ -52,7 +52,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('Areas/User/registration/register.html.twig', [
-            'registrationForm' => $form->createView(),'last_username' => $lastUsername, 'error' => $error,
+            'registrationForm' => $form->createView(),'last_username' => $lastUsername, 'error' => $error, 'isRegistering' => true,
         ]);
     }
 }

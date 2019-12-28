@@ -12,7 +12,7 @@
                     <li>
                         <a href="#">{{ app.user.username }}</a>
                         <ul class="menu">
-                        <li><a href="/logout">Deconnexion</a></li>
+                        <li><a href="{{ url('app_logout') }}">Deconnexion</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -52,7 +52,7 @@
         <div class="row align-right">
             <div class="small-12 columns">
                 <button class="" type="submit">
-                <a href="/register" class="button">Inscription</a>
+                <a href="{{ url('app_register') }}" class="button">Inscription</a>
                     Connexion
                 </button>
             </div>
