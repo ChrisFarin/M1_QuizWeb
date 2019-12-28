@@ -20,18 +20,18 @@ class CreateQuestionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Question')
-            ->add('Reponse1')
-            ->add('Reponse2')
-            ->add('Reponse3')
-            ->add('Reponse4') 
-            ->add('Bonne_reponse', ChoiceType::class,
-            array(
+            ->add('Entitled')
+            ->add('Response1')
+            ->add('Response2')
+            ->add('Response3')
+            ->add('Response4') 
+            ->add('GoodResponse', ChoiceType::class, 
+            array (
                 'choices' => array(
-                    '1',
-                    '2',
-                    '3',
-                    '4',
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '4' => '4',
                 )
             ))
         ;

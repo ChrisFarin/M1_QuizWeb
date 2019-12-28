@@ -10,6 +10,11 @@
 
         {{ form_start(CreateQuestionForm) }}
             {{ form_row(CreateQuestionForm.Entitled) }}
+            {{ form_row(CreateQuestionForm.Response1) }}
+            {{ form_row(CreateQuestionForm.Response2) }}
+            {{ form_row(CreateQuestionForm.Response3) }}
+            {{ form_row(CreateQuestionForm.Response4) }}
+            {{ form_row(CreateQuestionForm.GoodResponse) }}
             <button class="btn">Créer</button>
         {{ form_end(CreateQuestionForm) }}
     </div>
