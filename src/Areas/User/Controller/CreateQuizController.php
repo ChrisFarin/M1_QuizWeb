@@ -25,10 +25,10 @@ class CreateQuizController extends AbstractController
         $form = $this->createForm(CreateQuizFormType::class, $quiz);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $quiz->setName($form->get('Nom')->getData());
-            $quiz->setIsVisible($form->get('Visible')->getData());
+            $quiz->setName($form->get('Name')->getData());
+            $quiz->setIsVisible($form->get('isVisible')->getData());
             //TODO MODIFIER//
-            $quiz->setDate(getDate());
+            $quiz->setDate({{ "now"|date("m/d/Y") }});
             //TODO MODIFIER//
             $quiz->setAuthor(new User());
             // Peut être utiliser app.user
@@ -45,4 +45,5 @@ class CreateQuizController extends AbstractController
             'CreateQuizForm' => $form->createView()
         ]);
     }
+
 }
