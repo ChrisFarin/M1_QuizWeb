@@ -28,11 +28,11 @@
           <div class="row">
             <div class="small-12 columns">
               <ul class="tabs" data-tabs id="myTabs">
-                <li class="tabs-title is-active"><a href="#QuizList" aria-selected="true">Liste des quizs</a></li>
+                <li class="tabs-title {% if QuizListMenu is defined and QuizListMenu %} is-active {% endif %}"><a href="#QuizList" {% if QuizListMenu is defined and QuizListMenu %} aria-selected="true" {% endif %}>Liste des quizs</a></li>
                 {% if app.user %}
 
-                  <li class="tabs-title" ><a href="#MyQuizs">Mes quizs</a></li>
-                  <li class="tabs-title" ><a href="#CreateQuiz">Créer un quiz</a></li>
+                  <li class="tabs-title {% if MyQuizsMenu is defined and MyQuizsMenu %} is-active {% endif %}" ><a href="#MyQuizs" {% if MyQuizsMenu is defined and MyQuizsMenu %} aria-selected="true" {% endif %}>Mes quizs</a></li>
+                  <li class="tabs-title {% if CreateQuizMenu is defined and CreateQuizMenu %} is-active {% endif %}" ><a href="{{url('app_create_quiz')}}" {% if CreateQuizMenu is defined and CreateQuizMenu %} aria-selected="true" {% endif %}>Créer un quiz</a></li>
                 {% endif %}
               </ul>
             </div>
@@ -41,23 +41,7 @@
       {% endblock %}
           </nav>
       {% block body %}
-      
-      {% if isRegistering is not defined or isRegistering is null or not isRegistering %}
 
-      <div class="tabs-content" data-tabs-content="myTabs">
-        <div class="tabs-panel is-active" id="QuizList">
-          Page test
-        </div>
-        {% if app.user %}
-          <div class="tabs-panel" id="MyQuiz">
-
-          </div>
-          <div class="tabs-panel" id="CreateQuiz">
-            {{ render(url('app_create_quiz')) }}
-          </div>
-        {% endif %}
-      </div>
-      {% endif %}
       {% endblock %}
 
       {% block javascripts %}

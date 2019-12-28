@@ -1,9 +1,12 @@
+{% extends 'Areas/User/base.html.twig' %}
+
+{% block body %}
 
 <div class="row loginBlock">
     <div class="small-12 columns">
         <h1>Création d'un quizz</h1>
 
-        {{ form_start(CreateQuizForm) }}
+        {{ form_start(CreateQuizForm, {'action' : url('app_create_quiz')}) }}
             {{ form_row(CreateQuizForm.Name) }}
             {{ form_row(CreateQuizForm.isVisible) }}
 
@@ -12,3 +15,4 @@
     </div>
 
 </div>
+{% endblock %}

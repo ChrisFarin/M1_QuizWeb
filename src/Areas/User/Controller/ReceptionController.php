@@ -23,7 +23,8 @@ class ReceptionController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('Areas/User/index.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('Areas/User/index.html.twig', ['last_username' => $lastUsername, 'error' => $error,
+            'QuizListMenu' => true, ]);
     }
 
     /**

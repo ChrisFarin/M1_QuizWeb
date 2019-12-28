@@ -4,7 +4,9 @@ namespace App\Areas\User\Controller;
 
 use App\Entity\User;
 use App\Entity\Quiz;
+use App\Entity\Question;
 use App\Areas\User\Form\CreateQuizFormType;
+use App\Areas\User\Form\CreateQuestionFormType;
 use App\Areas\User\Security\Authenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +20,7 @@ use Symfony\Component\Security\Core\Security;
 class QuizController extends AbstractController
 {
     /**
-     * @Route("/create", name="app_create_quiz")
+     * @Route("/User/Quiz/create", name="app_create_quiz")
      */
     public function create(Request $request, Security $security)
     {
@@ -36,22 +38,45 @@ class QuizController extends AbstractController
             $entityManager->flush();
 
             // On redirige vers la création de questions
-            //return $this->redirectToRoute(route:'/create/question');
+            $response = $this->forward('App\Areas\User\Controller\QuizController::createQuestion', [
+                'id'  => $quiz->getId(),
+            ]);
+            return $response;
 
         }
 
         return $this->render('Areas/User/quiz/create.html.twig', [
-            'CreateQuizForm' => $form->createView()
+            'CreateQuizForm' => $form->createView(),
+            'CreateQuizMenu' => true,
         ]);
     }
 
     /**
-     * @Route("/create/question", name="question")
+     * @Route("/User/Quiz/createQuestion/{id}", name="app_create_question",  methods={"GET"})
      */
-    public function createQuestion()
+    public function createQuestion(Request $request, $id)
     {
+
+        $question = new Question();
+        $form = $this->createForm(CreateQuestionFormType::class, $question);
+        $form->handleRequest($request);
+
+        $quiz = $this->getDoctrine()
+            ->getRepository(Quiz::class)
+            ->find($id);
+
+        if (!$quiz) {
+            throw $this->createNotFoundException(
+                'No quiz found for id '.$id
+            );
+        }
+
+
         return $this->render('Areas/User/quiz/createQuestion.html.twig', [
-            'controller_name' => 'QuizController',
+            'quizId'   => $id,
+            'quizName' => $quiz->getName(),
+            'CreateQuestionForm' => $form->createView(),
+            'MyQuizsMenu' => true,
         ]);
     }
 }

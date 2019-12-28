@@ -18,6 +18,8 @@ use Symfony\Component\Security\Core\Security;
 
 class CreateQuestionController extends AbstractController
 {
+
+    // A deplacer dans quiz controller createquestion ...
     /**
      * @Route("/create/question", name="app_create_question")
      */
