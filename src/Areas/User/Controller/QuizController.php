@@ -74,13 +74,18 @@ class QuizController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $question->setEntitled($form->get('Entitled')->getData());
             $question->setQuiz($quiz);
-
+            $question->setResponse1($form->get('Response1')->getData());
+            $question->setResponse2($form->get('Response2')->getData());
+            if ($form->get('Response3') != NULL) {
+                $question->setResponse3($form->get('Response3')->getData());
+            }
+            if ($form->get('Response4') != NULL) {
+                $question->setResponse4($form->get('Response4')->getData());
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();
-
         }
-
 
          return $this->render('Areas/User/quiz/createQuestion.html.twig', [
             'quizId'   => $id,
