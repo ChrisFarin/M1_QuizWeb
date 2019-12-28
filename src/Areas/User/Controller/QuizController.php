@@ -16,4 +16,14 @@ class QuizController extends AbstractController
             'controller_name' => 'QuizController',
         ]);
     }
+
+    /**
+     * @Route("/create/question", name="question")
+     */
+    public function createQuestion()
+    {
+        return $this->render('Areas/User/quiz/createQuestion.html.twig', [
+            'controller_name' => 'QuizController',
+        ]);
+    }
 }

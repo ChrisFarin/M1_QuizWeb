@@ -21,16 +21,14 @@ class CreateQuestionController extends AbstractController
     /**
      * @Route("/create/question", name="app_create_question")
      */
-    public function register(Request $request, Security $security): Response
+    public function register(Request $request, Quiz $quiz): Response
     {
         $question = new Question();
         $form = $this->createForm(CreateQuestionFormType::class, $question);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $question->setEntitled($form->get('Entitled')->getData());
-            //TODO Recuperer le numéro du quiz
-            $quiz = 1;
-            $question->setQuiz($quiz);
+            $question->setQuiz($quiz->getId());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();

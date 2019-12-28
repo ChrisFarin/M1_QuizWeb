@@ -36,7 +36,7 @@ class CreateQuizController extends AbstractController
             $entityManager->flush();
 
             // On redirige vers la création de questions
-            return $this->redirectToRoute(route:'/create/question');
+            //return $this->redirectToRoute(route:'/create/question');
 
         }
 

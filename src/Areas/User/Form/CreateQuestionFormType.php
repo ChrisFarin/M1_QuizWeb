@@ -20,7 +20,6 @@ class CreateQuestionFormType extends AbstractType
     {
         $builder
             ->add('Entitled')
-            ])
         ;
     }
 

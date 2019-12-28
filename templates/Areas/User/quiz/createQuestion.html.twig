@@ -1,6 +1,6 @@
 {% extends 'Areas/User/base.html.twig' %}
 
-{% block title %}Création quizz{% endblock %}
+{% block title %}Création question{% endblock %}
 
 {% block connection %}
 
@@ -66,12 +66,10 @@
     <div class="small-12 columns">
         <h1>Création d'un quizz</h1>
 
-        {{ form_start(CreateQuizForm) }}
-            {{ form_row(CreateQuizForm.Name) }}
-            {{ form_row(CreateQuizForm.isVisible) }}
-
+        {{ form_start(CreateQuestionForm) }}
+            {{ form_row(CreateQuestionForm.Entitled) }}
             <button class="btn">Créer</button>
-        {{ form_end(CreateQuizForm) }}
+        {{ form_end(CreateQuestionForm) }}
     </div>
 
 </div>
