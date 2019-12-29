@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,29 +30,14 @@ class Question
     private $Entitled;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="Question")
      */
-    private $Response1;
+    private $answers;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Response2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $Response3;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $Response4;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $GoodResponse;
+    public function __construct()
+    {
+        $this->answers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -81,63 +68,35 @@ class Question
         return $this;
     }
 
-    public function getResponse1(): ?string
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
     {
-        return $this->Response1;
+        return $this->answers;
     }
 
-    public function setResponse1(string $Response1): self
+    public function addAnswer(Answer $answer): self
     {
-        $this->Response1 = $Response1;
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setQuestion($this);
+        }
 
         return $this;
     }
 
-    public function getResponse2(): ?string
+    public function removeAnswer(Answer $answer): self
     {
-        return $this->Response2;
-    }
-
-    public function setResponse2(string $Response2): self
-    {
-        $this->Response2 = $Response2;
+        if ($this->answers->contains($answer)) {
+            $this->answers->removeElement($answer);
+            // set the owning side to null (unless already changed)
+            if ($answer->getQuestion() === $this) {
+                $answer->setQuestion(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getResponse3(): ?string
-    {
-        return $this->Response3;
-    }
-
-    public function setResponse3(?string $Response3): self
-    {
-        $this->Response3 = $Response3;
-
-        return $this;
-    }
-
-    public function getResponse4(): ?string
-    {
-        return $this->Response4;
-    }
-
-    public function setResponse4(?string $Response4): self
-    {
-        $this->Response4 = $Response4;
-
-        return $this;
-    }
-
-    public function getGoodResponse(): ?int
-    {
-        return $this->GoodResponse;
-    }
-
-    public function setGoodResponse(int $GoodResponse): self
-    {
-        $this->GoodResponse = $GoodResponse;
-
-        return $this;
-    }
 }

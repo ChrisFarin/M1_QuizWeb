@@ -7,15 +7,18 @@
 <div class="row loginBlock">
     <div class="small-12 columns">
         <h1>Création d'une question pour le quiz {{ quizName }} numéro {{ quizId }}</h1>
+        {% if test is defined %}
 
-        {{ form_start(CreateQuestionForm) }}
-            {{ form_row(CreateQuestionForm.Entitled) }}
-            {{ form_row(CreateQuestionForm.Response1) }}
-            {{ form_row(CreateQuestionForm.Response2) }}
-            {{ form_row(CreateQuestionForm.Response3) }}
-            {{ form_row(CreateQuestionForm.Response4) }}
-            {{ form_row(CreateQuestionForm.GoodResponse) }}
-            <button class="btn">Créer</button>
+        {{test }}
+
+        {% endif %}
+        {{ form_start(CreateQuestionForm, {'action' : url('app_create_question', {id : quizId}), 'method' : 'POST' }) }}
+            {{ form_row(CreateQuestionForm.Question) }}
+            {{ form_row(CreateQuestionForm.Answer1) }}
+            {{ form_row(CreateQuestionForm.Answer2) }}
+            {{ form_row(CreateQuestionForm.Answer3) }}
+            {{ form_row(CreateQuestionForm.Answer4) }}
+            {{ form_row(CreateQuestionForm.Submit) }}
         {{ form_end(CreateQuestionForm) }}
     </div>
 
