@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class QuizController extends AbstractController
@@ -65,14 +66,19 @@ class QuizController extends AbstractController
         $defaultData = [];
         $form = $this->createFormBuilder($defaultData)
           ->add('Question', TextType::class)
-          ->add('Answer1', TextType::class)
-          ->add('isRightAnswer1', CheckboxType::class)
-          ->add('Answer2', TextType::class)
-          ->add('isRightAnswer2', CheckboxType::class)
-          ->add('Answer3', TextType::class)
-          ->add('isRightAnswer3', CheckboxType::class)
-          ->add('Answer4', TextType::class)
-          ->add('isRightAnswer4', CheckboxType::class)
+          ->add('Answer1', TextType::class, ['label' => 'Réponse 1*'])
+          ->add('Answer2', TextType::class, ['label' => 'Réponse 2*'])
+          ->add('Answer3', TextType::class, ['label' => 'Réponse 3', 'required' => false])
+          ->add('Answer4', TextType::class, ['label' => 'Réponse 4', 'required' => false])
+          ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
+            'choices' => [
+                '1' => 'Réponse 1',
+                '2' => 'Réponse 2',
+                '3' => 'Réponse 3',
+                '4' => 'Réponse 4',
+            ],
+            'placeholder' => 'Choix',
+          ])
           ->add('Submit', SubmitType::class)
           ->setMethod('GET')
           ->setAction($this->generateUrl('app_create_question', ['id' => $id, ]))
@@ -100,35 +106,32 @@ class QuizController extends AbstractController
             $question->setEntitled($data['Question']);
             $entityManager->persist($question);
 
-
-
-
             if ($data['Answer1'] != NULL) {
               $r1 = new Answer();
               $r1->setEntitled($data['Answer1']);
               $r1->setQuestion($question);
-              $r1->setIsRightAnswer($data['isRightAnswer1']);
+              $r1->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 1');
               $entityManager->persist($r1);
             }
             if ($data['Answer2'] != NULL) {
               $r2 = new Answer();
               $r2->setEntitled($data['Answer2']);
               $r2->setQuestion($question);
-              $r2->setIsRightAnswer($data['isRightAnswer2']);
+              $r2->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 2');
               $entityManager->persist($r2);
             }
             if ($data['Answer3'] != NULL) {
               $r3 = new Answer();
               $r3->setEntitled($data['Answer3']);
               $r3->setQuestion($question);
-              $r3->setIsRightAnswer($data['isRightAnswer3']);
+              $r3->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 3');
               $entityManager->persist($r3);
             }
             if ($data['Answer4'] != NULL) {
               $r4= new Answer();
               $r4->setEntitled($data['Answer4']);
               $r4->setQuestion($question);
-              $r4->setIsRightAnswer($data['isRightAnswer4']);
+              $r4->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 4');
               $entityManager->persist($r4);
             }
 
