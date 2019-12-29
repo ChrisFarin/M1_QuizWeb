@@ -136,7 +136,7 @@ class QuizController extends AbstractController
             }
 
             $entityManager->flush();
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_create_question', ['id' => $id]);
         }
 
          return $this->render('Areas/User/quiz/createQuestion.html.twig', [
