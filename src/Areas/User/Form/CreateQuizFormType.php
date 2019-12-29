@@ -24,6 +24,7 @@ class CreateQuizFormType extends AbstractType
                 'required' => false,
 
             ])
+            ->setMethod('GET')
         ;
     }
 

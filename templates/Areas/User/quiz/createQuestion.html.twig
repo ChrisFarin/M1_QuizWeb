@@ -12,7 +12,7 @@
         {{test }}
 
         {% endif %}
-        {{ form_start(CreateQuestionForm, {'action' : url('app_create_question', {id : quizId}), 'method' : 'POST' }) }}
+        {{ form_start(CreateQuestionForm) }}
             {{ form_row(CreateQuestionForm.Question) }}
             {{ form_row(CreateQuestionForm.Answer1) }}
             {{ form_row(CreateQuestionForm.Answer2) }}

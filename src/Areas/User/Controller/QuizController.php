@@ -57,7 +57,7 @@ class QuizController extends AbstractController
     }
 
     /**
-     * @Route("/User/Quiz/createQuestion/{id}", name="app_create_question",  methods={"POST"})
+     * @Route("/User/Quiz/createQuestion/{id}", name="app_create_question",  methods={"GET"})
      */
     public function createQuestion(Request $request, $id)
     {
@@ -74,6 +74,8 @@ class QuizController extends AbstractController
           ->add('Answer4', TextType::class)
           ->add('isRightAnswer4', CheckboxType::class)
           ->add('Submit', SubmitType::class)
+          ->setMethod('GET')
+          ->setAction($this->generateUrl('app_create_question', ['id' => $id, ]))
           ->getForm();
         $form->handleRequest($request);
 
