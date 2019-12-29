@@ -26,7 +26,7 @@ class ReceptionController extends AbstractController
         $quizs = $this->getDoctrine()
             ->getRepository(Quiz::class)
             ->getAllVisible();
-        echo $quizs[0]-> getIsVisible();
+
 
 
 
