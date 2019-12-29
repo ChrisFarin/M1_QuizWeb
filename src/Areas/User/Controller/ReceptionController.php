@@ -2,6 +2,7 @@
 
 namespace App\Areas\User\Controller;
 
+use App\Entity\Quiz;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,9 +23,16 @@ class ReceptionController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        $quizs = $this->getDoctrine()
+            ->getRepository(Quiz::class)
+            ->getAllVisible();
+        echo $quizs[0]-> getIsVisible();
 
+
+
+        
         return $this->render('Areas/User/index.html.twig', ['last_username' => $lastUsername, 'error' => $error,
-            'QuizListMenu' => true, ]);
+            'QuizListMenu' => true, 'quizs' => $quizs ]);
     }
 
     /**

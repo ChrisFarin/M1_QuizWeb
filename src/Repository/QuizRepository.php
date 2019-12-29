@@ -22,6 +22,23 @@ class QuizRepository extends ServiceEntityRepository
     // /**
     //  * @return Quiz[] Returns an array of Quiz objects
     //  */
+    
+    public function getAllVisible()
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.IsVisible = :val')
+            ->setParameter('val', true)
+            ->orderBy('q.Date', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
+
+    // /**
+    //  * @return Quiz[] Returns an array of Quiz objects
+    //  */
     /*
     public function findByExampleField($value)
     {

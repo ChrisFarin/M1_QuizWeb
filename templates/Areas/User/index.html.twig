@@ -3,3 +3,38 @@
 {% block title %}
   SYB - Accueil
 {% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="small-12 columns">
+    {% if quizs|length == 0 %}
+      <div class="center-text">
+          Aucun quiz trouvé
+      </div>
+    {% else %}
+      <table>
+        <thead>
+          <tr>
+            <th> 
+              Nom
+            </th>
+            <th>
+              Autres
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quiz in quizs%}
+             <tr>
+               <td>{{ quiz.Name}}</td>
+               <td>Style à revoir ! Lien à rendre cliquable vers ... je sais pas ? !</td>
+             </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    </div>
+  </div>
+  
+
+{% endblock %}
