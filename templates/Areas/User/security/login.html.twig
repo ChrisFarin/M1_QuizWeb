@@ -32,6 +32,11 @@
             <div class="small-6 columns">
                 <label for="inputPassword">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" required>
+                <div class="right-text">
+                    <a href="{{ url('app_register') }}" class="">Inscription</a>
+                    <button class="" type="submit"> Connexion</button>
+                    
+                 </div>
             </div>
         </div>
         <input type="hidden" name="_csrf_token"
@@ -49,13 +54,8 @@
                 </label>
             </div>
         #}
-        <div class="row align-right">
-            <div class="small-12 columns">
-                <button class="" type="submit">
-                <a href="{{ url('app_register') }}" class="button">Inscription</a>
-                    Connexion
-                </button>
-            </div>
+
+
         </div>
     </form>
     {% endif %}
