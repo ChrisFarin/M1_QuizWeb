@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class QuizController extends AbstractController
 {
@@ -133,8 +133,7 @@ class QuizController extends AbstractController
             }
 
             $entityManager->flush();
-             $response = $this->forward('App\Areas\User\Controller\ReceptionController::index');
-             return $response;
+            return $this->redirectToRoute('app_index');
         }
 
          return $this->render('Areas/User/quiz/createQuestion.html.twig', [
