@@ -2,15 +2,17 @@
 
 {% block body %}
 
-<div class="row loginBlock">
-    <div class="small-12 columns">
-        <h1>Création d'un quizz</h1>
+<div class="row align-center">
+    <div class="small-12 medium-6 columns">
+        <h1 class="center-text">Création d'un quizz</h1>
 
         {{ form_start(CreateQuizForm, {'action' : url('app_create_quiz')}) }}
             {{ form_row(CreateQuizForm.Name) }}
-            {{ form_row(CreateQuizForm.isVisible) }}
-
-            <button class="btn">Créer</button>
+            {{ form_label(CreateQuizForm.isVisible)}}
+            {{ form_widget(CreateQuizForm.isVisible)}}
+            <div class="right-text">
+                <button class="btn">Créer</button>
+            </div>
         {{ form_end(CreateQuizForm) }}
     </div>
 
