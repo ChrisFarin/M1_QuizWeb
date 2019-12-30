@@ -109,10 +109,12 @@ class QuizController extends AbstractController
             'choices' => [
                 'Réponse 1' => 'Réponse 1',
                 'Réponse 2' => 'Réponse 2',
+                'Réponse 3' => 'Réponse 3',
+                'Réponse 4' => 'Réponse 4',
             ],
             'placeholder' => 'Veuillez sélectionner une bonne réponse.',
           ])
-          ->add('Submit', SubmitType::class)
+          ->add('Submit', SubmitType::class, ['label' => 'Ajouter la question'])
           ->setMethod('GET')
           ->setAction($this->generateUrl('app_create_question', ['id' => $id, ]))
           ->getForm();

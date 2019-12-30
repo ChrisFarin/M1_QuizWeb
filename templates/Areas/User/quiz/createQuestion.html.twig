@@ -12,11 +12,7 @@
         {{test }}
 
         {% endif %}
-        <center>
-            <form action={{path("app_index")}} method="post">
-                <button type="submit">Fin du quizz</button>
-            </form>
-        </center>
+        
         {{ form_start(CreateQuestionForm) }}
             {{ form_row(CreateQuestionForm.Question) }}
             {{ form_row(CreateQuestionForm.Answer1) }}
@@ -28,16 +24,20 @@
             {{ form_row(CreateQuestionForm.Submit) }}
             </center>
         {{ form_end(CreateQuestionForm) }}
+        <div class="center-text">
+            <form action={{path("app_index")}} method="post">
+                <button type="submit" class="mar-top">Fin du quizz</button>
+            </form>
+        </div>
         <br />
     </div>
 </div>
 {% endblock %}
 
 {% block javascripts %}
-<script src= 
-        "https://code.jquery.com/jquery-3.3.1.min.js"> 
-    </script> 
 <script>
+    $("#form_GoodAnswer option[value='Réponse 3']").remove();
+    $("#form_GoodAnswer option[value='Réponse 4']").remove();
     $('#form_Answer3').on('change', function() {
         if ($('#form_Answer3').val() != "" && $("#form_GoodAnswer option[value='Réponse 3']").length ==0) { 
             $('#form_GoodAnswer').append($('<option>').val('Réponse 3').text('Réponse 3'));
