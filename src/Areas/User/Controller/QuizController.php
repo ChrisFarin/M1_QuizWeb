@@ -107,8 +107,8 @@ class QuizController extends AbstractController
           ->add('Answer4', TextType::class, ['label' => 'Réponse 4', 'required' => false])
           ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
             'choices' => [
-                '1' => 'Réponse 1',
-                '2' => 'Réponse 2',
+                'Réponse 1' => 'Réponse 1',
+                'Réponse 2' => 'Réponse 2',
             ],
             'placeholder' => 'Choix',
           ])
@@ -117,46 +117,7 @@ class QuizController extends AbstractController
           ->setAction($this->generateUrl('app_create_question', ['id' => $id, ]))
           ->getForm();
 
-        $builder -> addEventListener (
-          FormEvents :: PRE_SET_DATA ,
-          function ( FormEvent $event ) {
-              $form = $event -> getForm ();
-              $data = $event -> getData ();
-              $answer3 = $data['Answer3'];
-              $answer4 = $data['Answer4'];
-              
-              if ($answer3 != null) {
-                if ($answer4 != null) {
-                  $form ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
-                    'choices' => [
-                        '1' => 'Réponse 1',
-                        '2' => 'Réponse 2',
-                        '3' => 'Réponse 3',
-                        '4' => 'Réponse 4',
-                    ],
-                    'placeholder' => 'Choix',
-                  ]);
-                  } else {
-                  $form ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
-                    'choices' => [
-                        '1' => 'Réponse 1',
-                        '2' => 'Réponse 2',
-                        '3' => 'Réponse 3',
-                    ],
-                    'placeholder' => 'Choix',
-                  ]);
-                }
-              } else {
-                $form ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
-                      'choices' => [
-                          '1' => 'Réponse 1',
-                          '2' => 'Réponse 2',
-                      ],
-                      'placeholder' => 'Choix',
-                    ]);
-              }
-          }
-        );
+        
         $form->handleRequest($request);
 
         $quiz = $this->getDoctrine()
