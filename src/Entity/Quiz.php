@@ -58,9 +58,20 @@ class Quiz
 
     private $resultDisplay;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Amount = 0;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Score", mappedBy="Quiz", orphanRemoval=true)
+     */
+    private $scores;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,5 +170,48 @@ class Quiz
 
     public function getResultDisplay(): ?string {
         return $this -> resultDisplay;
+    }
+
+    public function getAmount(): ?int
+    {
+        return $this->Amount;
+    }
+
+    public function setAmount(int $Amount): self
+    {
+        $this->Amount = $Amount;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Score[]
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores;
+    }
+
+    public function addScore(Score $score): self
+    {
+        if (!$this->scores->contains($score)) {
+            $this->scores[] = $score;
+            $score->setQuiz($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScore(Score $score): self
+    {
+        if ($this->scores->contains($score)) {
+            $this->scores->removeElement($score);
+            // set the owning side to null (unless already changed)
+            if ($score->getQuiz() === $this) {
+                $score->setQuiz(null);
+            }
+        }
+
+        return $this;
     }
 }

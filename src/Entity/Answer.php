@@ -31,6 +31,11 @@ class Answer
      */
     private $Question;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $AnsweredRight = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Answer
     public function setQuestion(?Question $Question): self
     {
         $this->Question = $Question;
+
+        return $this;
+    }
+
+    public function getAnsweredRight(): ?int
+    {
+        return $this->AnsweredRight;
+    }
+
+    public function setAnsweredRight(int $AnsweredRight): self
+    {
+        $this->AnsweredRight = $AnsweredRight;
 
         return $this;
     }

@@ -1,28 +1,42 @@
 {% extends 'Areas/User/base.html.twig' %}
 
 {% block body %}
-
+<script> 
+    var associativeQuestion = {};
+    var associativeAnswer = {};
+ </script>
 <div class="row align-center">
     <div class="small-12 medium-6 columns">
-        <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
-        <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
-        {% set questionForTest = 1 %}
-        {% for question in quiz.questions %}
-                    <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled }}</span>
-                    <div class="row align-center">
-                        {% for response in question.answers %}
-                            <div class="small-12 medium-6 columns">
-                                <div class="responseQuiz" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
-                                   {{ response.entitled }}
-                                </div>
-                            </div>
-                        {% endfor %}
-                        </div>
-                    </div>
-            {% set questionForTest = questionForTest + 1 %}
-        {% endfor %}
+        <div id="quizBlock">
+            <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
+            <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
+            {% set questionForTest = 1 %}
+            {% for question in quiz.questions %}
+                        <script> associativeQuestion[{{question.id}}] = '{{question.entitled}}';</script>
+                        <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled }}</span>
+                        <div class="row align-center">
+                            {% for response in question.answers %}
+                                <script> associativeAnswer[{{response.id}}] = '{{response.entitled}}';</script>
 
+                                <div class="small-12 medium-6 columns">
+                                    <div class="responseQuiz" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
+                                    {{ response.entitled }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </div>
+                {% set questionForTest = questionForTest + 1 %}
+            {% endfor %}
+        </div>
+        <div id="resultBlock" class="hidden">
+        <div class="text-center"> Votre score est de <span id="score"> </span> / {{quiz.questions|length}} </div>
+
+
+         </div>
     </div>
+
+    
 
 </div>
 {% endblock %}
@@ -30,20 +44,66 @@
 
 {% block javascripts %}
 <script>
+    var resultTest = {};
     var questionNumber = 1;
     $('#startButton').on('click', function() {
         $(this).hide();
         $('[data-test="' + questionNumber + '"]').removeClass('hidden');
     });
     $('[data-answer]').on('click', function() {
-        $('[data-test="' + questionNumber + '"]').addClass('hidden');
+        var oldQuestion = $('[data-test="' + questionNumber + '"]');
+        oldQuestion.addClass('hidden');
         questionNumber += 1;
         var nextQuestion = $('[data-test="' + questionNumber + '"]');
         // On teste si une autre question existe
+        resultTest[oldQuestion.data('question')] = $(this).data('answer');
         if (nextQuestion.length != 0) {
+            
             $('[data-test="' + questionNumber + '"]').removeClass('hidden');
         } else {
-            console.log("fin du test");
+            $('#quizBlock').addClass('hidden');
+            $('#resultBlock').removeClass('hidden');
+            var rightAnswer = 0;
+            var onlyScoreDisplay = ('{{quiz.resultDisplay}}' == 'ONLYSCORE');
+            var displayQuestion = "<div class='row align-center'>";
+            {% for key in keys %}
+                if(!onlyScoreDisplay) {
+                    displayQuestion += "<div class='medium-3 small-12 columns'>";
+                    displayQuestion += "<div class='row align-center'>";
+                    displayQuestion += "<div class='small-12 columns'>";
+                    displayQuestion += '<div class="text-center">' + associativeQuestion[{{key}}] + '</div>';
+                    displayQuestion += "</div>";
+                }
+
+                if (resultTest[{{key}}] == {{result[key]}}) {
+                    rightAnswer += 1;
+                    displayQuestion += "<div class='medium-6 small-12 columns'>";
+                    displayQuestion += '<div class="rightAnswer">' + associativeAnswer[{{result[key]}}] + '</div>';
+                    displayQuestion += "</div>";
+
+                } else if(!onlyScoreDisplay) {
+                    if ('{{quiz.resultDisplay}}' == 'SHOWANSWER') {
+
+                        displayQuestion += "<div class='medium-6 small-12 columns'>";
+                        displayQuestion += '<div class="rightAnswer">' + associativeAnswer[{{result[key]}}] + '</div>';
+                        displayQuestion += "</div>";
+
+                    }
+                    displayQuestion += "<div class='medium-6 small-12 columns'>";
+
+                    displayQuestion += '<div class="wrongAnswer">' + resultTest[{{key}}] + '</div>';
+                    displayQuestion += "</div>";
+
+
+                }
+                displayQuestion += "</div>"
+            {% endfor %}
+            displayQuestion += "</div>"
+            $('#score').text(rightAnswer);
+            if(!onlyScoreDisplay) {
+                $('#resultBlock').append(displayQuestion);
+            }
+            // Ajax à faire pour stocker les résultats
         }
     })
 </script>

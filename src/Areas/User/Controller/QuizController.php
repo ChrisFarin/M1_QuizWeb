@@ -197,11 +197,23 @@ class QuizController extends AbstractController
               'No quiz found for id '.$id
           );
       }
-      
+      $result = array();
+      // Obliger d'envoyer les clés du tableau à partir du serveeur pour pouvoir itérer dessus en JS
+      $keys = array();
+      foreach ($quiz -> getQuestions() as $question) {
+          array_push($keys, $question->getId());
+          foreach ($question -> getAnswers() as $answer) {
+            if ($answer-> getIsRightAnswer()) {
+                $result[$question->getId()] = $answer->getId();
+            }
+          }
+      }
       return $this->render('Areas/User/quiz/doQuiz.html.twig', [
         'quizId'   => $id,
         'hideNavBar' => true,
-        'quiz' => $quiz, 
+        'quiz' => $quiz,
+        'result' => $result,
+        'keys' => $keys
     ]);
 
 

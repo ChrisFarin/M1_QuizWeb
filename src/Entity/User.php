@@ -42,9 +42,16 @@ class User implements UserInterface
      */
     private $quizzes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Score", mappedBy="Player")
+     */
+    private $scores;
+
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
+        $this->scores = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +152,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($quiz->getAuthor() === $this) {
                 $quiz->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Score[]
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores;
+    }
+
+    public function addScore(Score $score): self
+    {
+        if (!$this->scores->contains($score)) {
+            $this->scores[] = $score;
+            $score->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScore(Score $score): self
+    {
+        if ($this->scores->contains($score)) {
+            $this->scores->removeElement($score);
+            // set the owning side to null (unless already changed)
+            if ($score->getPlayer() === $this) {
+                $score->setPlayer(null);
             }
         }
 
