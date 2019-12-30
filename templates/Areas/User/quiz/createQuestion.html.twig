@@ -34,13 +34,23 @@
 {% endblock %}
 
 {% block javascripts %}
+<script src= 
+        "https://code.jquery.com/jquery-3.3.1.min.js"> 
+    </script> 
 <script>
     $('#form_Answer3').on('change', function() {
-        $('#form_GoodAnswer').append($('<option>').val('Réponse 3').text('Réponse 3'));
-    
+        if ($('#form_Answer3').val() != "" && $("#form_GoodAnswer option[value='Réponse 3']").length ==0) { 
+            $('#form_GoodAnswer').append($('<option>').val('Réponse 3').text('Réponse 3'));
+        } else if ($('#form_Answer3').val() == "") { 
+            $("#form_GoodAnswer option[value='Réponse 3']").remove();
+        }
     });
     $('#form_Answer4').on('change', function() {
-        $('#form_GoodAnswer').append($('<option>').val('Réponse 4').text('Réponse 4'));
+        if ($('#form_Answer4').val() != "" && $("#form_GoodAnswer option[value='Réponse 4']").length ==0) { 
+            $('#form_GoodAnswer').append($('<option>').val('Réponse 4').text('Réponse 4'));
+        } else if ($('#form_Answer4').val() == "") { 
+            $("#form_GoodAnswer option[value='Réponse 4']").remove();
+        }
     });
 </script>
 {% endblock %}
