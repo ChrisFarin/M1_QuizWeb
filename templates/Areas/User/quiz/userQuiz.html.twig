@@ -31,7 +31,7 @@
              <tr>
                <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
                <td> {% if quiz.IsVisible %} Oui {% else %} Non {% endif %}</td>
-               <td> Editer </td>
+               <td> <i class="fa fa-pencil-alt"></i> </td>
              </tr>
           {% endfor %}
         </tbody>
