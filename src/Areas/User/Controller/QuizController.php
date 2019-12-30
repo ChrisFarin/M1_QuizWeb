@@ -171,4 +171,18 @@ class QuizController extends AbstractController
 
 
     }
+    /**
+     * @Route("/User/Quiz/UserPersonalQuiz", name="app_user_quiz")
+     */
+    public function userPersonalQuiz(Request $request, Security $security)
+    {
+      $usr = $security->getUser();
+      $quizs = $this->getDoctrine()
+      ->getRepository(Quiz::class)
+      ->getAllByUser($usr->getId());
+
+
+      return $this->render('Areas/User/quiz/userQuiz.html.twig',
+            ['MyQuizsMenu' => true, 'quizs' => $quizs , ]);
+    }
 }

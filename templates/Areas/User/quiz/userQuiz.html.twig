@@ -1,0 +1,44 @@
+{% extends 'Areas/User/base.html.twig' %}
+
+{% block title %}
+  SYB - Accueil
+{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="small-12 columns">
+    {% if quizs|length == 0 %}
+      <div class="center-text">
+          Aucun quiz trouvé
+      </div>
+    {% else %}
+      <table>
+        <thead>
+          <tr>
+            <th> 
+              Nom
+            </th>
+            <th>
+              Visible
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quiz in quizs%}
+             <tr>
+               <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
+               <td> {% if quiz.IsVisible %} Oui {% else %} Non {% endif %}</td>
+               <td> Editer </td>
+             </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    </div>
+  </div>
+  
+
+{% endblock %}

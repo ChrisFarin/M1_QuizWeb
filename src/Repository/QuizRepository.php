@@ -33,6 +33,18 @@ class QuizRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+
+    public function getAllByUser($userId)
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.Author = :val')
+            ->setParameter('val', $userId)
+            ->orderBy('q.Date', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
 
