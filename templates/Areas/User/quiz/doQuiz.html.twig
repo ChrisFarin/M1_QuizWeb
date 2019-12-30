@@ -4,13 +4,49 @@
 
 <div class="row align-center">
     <div class="small-12 medium-6 columns">
-        {% for question in questions %}
-            {{ question.entitled }}
-            {% for response in question.answers %}
-                {{ response.entitled }}
-            {% endfor %}
+        <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
+        <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
+        {% set questionForTest = 1 %}
+        {% for question in quiz.questions %}
+                    <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled }}</span>
+                    <div class="row align-center">
+                        {% for response in question.answers %}
+                            <div class="small-12 medium-6 columns">
+                                <div class="responseQuiz" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
+                                   {{ response.entitled }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+            {% set questionForTest = questionForTest + 1 %}
         {% endfor %}
+
     </div>
 
 </div>
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+    var questionNumber = 1;
+    $('#startButton').on('click', function() {
+        $(this).hide();
+        $('[data-test="' + questionNumber + '"]').removeClass('hidden');
+    });
+    $('[data-answer]').on('click', function() {
+        console.log("cc");
+        console.log($(this).data('answer'));
+        $('[data-test="' + questionNumber + '"]').addClass('hidden');
+        questionNumber += 1;
+        var nextQuestion = $('[data-test="' + questionNumber + '"]');
+        // On teste si une autre question existe
+        if (nextQuestion.length != 0) {
+            $('[data-test="' + questionNumber + '"]').removeClass('hidden');
+        } else {
+            console.log("fin du test");
+        }
+    })
+</script>
 {% endblock %}

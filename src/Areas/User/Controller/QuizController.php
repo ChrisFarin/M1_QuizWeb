@@ -162,11 +162,11 @@ class QuizController extends AbstractController
               'No quiz found for id '.$id
           );
       }
-      $questions = $quiz -> getQuestions();
+      
       return $this->render('Areas/User/quiz/doQuiz.html.twig', [
         'quizId'   => $id,
         'hideNavBar' => true,
-        'questions' => $questions, 
+        'quiz' => $quiz, 
     ]);
 
 

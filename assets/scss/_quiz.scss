@@ -1,0 +1,22 @@
+#quizName {
+    color:$primary-color;
+    border: 1px solid $primary-color;
+    border-radius: 2%;
+    font-size: 2.5em;
+    margin-bottom: $global-margin;
+}
+
+.questionQuiz {
+    border: 1px solid $primary-color;
+    border-radius: 2%;
+    font-size: 1.5em;
+}
+
+.responseQuiz {
+    margin:$global-margin;
+    border: 1px solid $primary-color;
+    border-radius: 2%;
+    font-size: 1.0em;
+    background-color: none !important;
+}
+
