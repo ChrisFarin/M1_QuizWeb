@@ -19,6 +19,9 @@
               Nom
             </th>
             <th>
+              Nombre de questions
+            </th>
+            <th>
               Visible
             </th>
             <th>
@@ -30,8 +33,18 @@
           {% for quiz in quizs%}
              <tr>
                <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
-               <td> {% if quiz.IsVisible %} Oui {% else %} Non {% endif %}</td>
-               <td> <i class="fa fa-pencil-alt"></i> </td>
+               <td> {{ quiz.questions|length}} </td>
+               <td> {% if quiz.IsVisible %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</td>
+               <td> <a href="{{url('app_edit_quiz', {'id' : quiz.id})}}">
+                      <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a href="{{url('app_create_question', {'id': quiz.id})}}">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    <a href="{{url('app_delete_quiz', {'id': quiz.id})}}">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </td>
              </tr>
           {% endfor %}
         </tbody>

@@ -6,7 +6,7 @@ use App\Entity\User;
 use App\Entity\Quiz;
 use App\Entity\Question;
 use App\Entity\Answer;
-use App\Areas\User\Form\CreateQuizFormType;
+use App\Areas\User\Form\CreateOrEditQuizFormType;
 use App\Areas\User\Form\CreateQuestionFormType;
 use App\Areas\User\Security\Authenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +31,7 @@ class QuizController extends AbstractController
     public function create(Request $request, Security $security)
     {
         $quiz = new Quiz();
-        $form = $this->createForm(CreateQuizFormType::class, $quiz);
+        $form = $this->createForm(CreateOrEditQuizFormType::class, $quiz);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $quiz->setName($form->get('Name')->getData());
@@ -51,9 +51,44 @@ class QuizController extends AbstractController
 
         }
 
-        return $this->render('Areas/User/quiz/create.html.twig', [
-            'CreateQuizForm' => $form->createView(),
+        return $this->render('Areas/User/quiz/createOrEditQuiz.html.twig', [
+            'CreateOrEditQuizForm' => $form->createView(),
             'CreateQuizMenu' => true,
+        ]);
+    }
+    /**
+     * @Route("/User/Quiz/edit/{id}", name="app_edit_quiz",  methods={"GET"})
+     */
+    public function edit(Request $request, Security $security, $id)
+    {
+        $quiz = $this->getDoctrine()
+              ->getRepository(Quiz::class)
+              ->find($id);
+
+        if (!$quiz) {
+            throw $this->createNotFoundException(
+                'No quiz found for id '.$id
+            );
+        }
+        $form = $this->createForm(CreateOrEditQuizFormType::class, $quiz);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $quiz->setName($form->get('Name')->getData());
+            $quiz->setIsVisible($form->get('isVisible')->getData());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($quiz);
+            $entityManager->flush();
+
+            // On redirige vers les quiz de l'utilisateur
+            return $this->redirectToRoute('app_user_quiz');
+        }
+
+        return $this->render('Areas/User/quiz/createOrEditQuiz.html.twig', [
+            'CreateOrEditQuizForm' => $form->createView(),
+            'MyQuizsMenu' => true,
+            'isEditing' => true,
+            'quizId' => $id,
+
         ]);
     }
 
@@ -184,5 +219,20 @@ class QuizController extends AbstractController
 
       return $this->render('Areas/User/quiz/userQuiz.html.twig',
             ['MyQuizsMenu' => true, 'quizs' => $quizs , ]);
+    }
+
+
+    /**
+     * @Route("/User/Quiz/DeleteQuiz/{id}", name="app_delete_quiz")
+     */
+    public function deleteQuiz(Request $request, $id)
+    {
+      $entityManager = $this->getDoctrine()->getManager();
+      $quiz = $this->getDoctrine()
+         ->getRepository(Quiz::class)
+         ->find($id);
+      $entityManager->remove($quiz);
+      $entityManager->flush();
+      return $this->redirectToRoute('app_user_quiz');
     }
 }

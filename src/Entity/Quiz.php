@@ -40,7 +40,9 @@ class Quiz
     private $IsVisible;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="Quiz", orphanRemoval=true)
+     * 
+     * https://gist.github.com/pylebecq/f844d1f6860241d8b025
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="Quiz", orphanRemoval=true, cascade={"remove"})
      */
     private $questions;
 

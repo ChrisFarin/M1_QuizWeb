@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class CreateQuizFormType extends AbstractType
+class CreateOrEditQuizFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

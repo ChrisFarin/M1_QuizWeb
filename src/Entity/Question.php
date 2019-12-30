@@ -30,7 +30,7 @@ class Question
     private $Entitled;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="Question")
+     * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="Question", cascade={"remove"})
      */
     private $answers;
 

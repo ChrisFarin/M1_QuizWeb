@@ -1,0 +1,21 @@
+{% extends 'Areas/User/base.html.twig' %}
+
+{% block body %}
+
+{% set isCreating = (isEditing is not defined or isEditing == null or not isEditing) %}
+<div class="row align-center">
+    <div class="small-12 medium-6 columns">
+        <h1 class="center-text">{% if isCreating %} Création {% else %} Edition {% endif %} d'un quizz</h1>
+        {% set action = isCreating ? url('app_create_quiz') : url('app_edit_quiz', {'id': quizId}) %}
+        {{ form_start(CreateOrEditQuizForm, {'action' : action}) }}
+            {{ form_row(CreateOrEditQuizForm.Name) }}
+            {{ form_label(CreateOrEditQuizForm.isVisible)}}
+            {{ form_widget(CreateOrEditQuizForm.isVisible)}}
+            <div class="right-text">
+                <button class="btn">{% if isCreating %} Créer {% else %} Mettre à jour {% endif %}</button>
+            </div>
+        {{ form_end(CreateOrEditQuizForm) }}
+    </div>
+
+</div>
+{% endblock %}
