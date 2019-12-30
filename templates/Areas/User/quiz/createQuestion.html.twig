@@ -12,6 +12,9 @@
         {{test }}
 
         {% endif %}
+        <form action={{path("app_index")}} method="post">
+            <button type="submit">Fin du quizz</button>
+        </form>
         {{ form_start(CreateQuestionForm) }}
             {{ form_row(CreateQuestionForm.Question) }}
             {{ form_row(CreateQuestionForm.Answer1) }}
