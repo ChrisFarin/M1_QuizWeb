@@ -65,7 +65,7 @@ class QuizController extends AbstractController
 
         $defaultData = [];
         $form = $this->createFormBuilder($defaultData)
-          ->add('Question', TextType::class)
+          ->add('Question', TextType::class, ['label' => 'Question*'])
           ->add('Answer1', TextType::class, ['label' => 'Réponse 1*'])
           ->add('Answer2', TextType::class, ['label' => 'Réponse 2*'])
           ->add('Answer3', TextType::class, ['label' => 'Réponse 3', 'required' => false])
