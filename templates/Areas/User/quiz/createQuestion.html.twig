@@ -4,14 +4,19 @@
 
 
 {% block body %}
-<div class="row loginBlock">
-    <div class="small-12 columns">
+<div class="row align-center">
+    <div class="small-12 medium-6 columns">
         <h1>Création d'une question pour le quiz {{ quizName }} numéro {{ quizId }}</h1>
         {% if test is defined %}
 
         {{test }}
 
         {% endif %}
+        <center>
+            <form action={{path("app_index")}} method="post">
+                <button type="submit">Fin du quizz</button>
+            </form>
+        </center>
         {{ form_start(CreateQuestionForm) }}
             {{ form_row(CreateQuestionForm.Question) }}
             {{ form_row(CreateQuestionForm.Answer1) }}
@@ -19,9 +24,11 @@
             {{ form_row(CreateQuestionForm.Answer3) }}
             {{ form_row(CreateQuestionForm.Answer4) }}
             {{ form_row(CreateQuestionForm.GoodAnswer) }}
+            <center>
             {{ form_row(CreateQuestionForm.Submit) }}
+            </center>
         {{ form_end(CreateQuestionForm) }}
+        <br />
     </div>
-
 </div>
 {% endblock %}
