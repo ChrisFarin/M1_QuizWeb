@@ -36,8 +36,6 @@
         $('[data-test="' + questionNumber + '"]').removeClass('hidden');
     });
     $('[data-answer]').on('click', function() {
-        console.log("cc");
-        console.log($(this).data('answer'));
         $('[data-test="' + questionNumber + '"]').addClass('hidden');
         questionNumber += 1;
         var nextQuestion = $('[data-test="' + questionNumber + '"]');
