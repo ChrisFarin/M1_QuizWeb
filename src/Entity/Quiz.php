@@ -11,6 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Quiz
 {
+
+    const ONLYSCORE = "ONLYSCORE";
+    const HIDEANSWER = "HIDEANSWER";
+    const SHOWANSWER = "SHOWANSWER";
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -45,6 +50,13 @@ class Quiz
      * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="Quiz", orphanRemoval=true, cascade={"remove"})
      */
     private $questions;
+
+
+    /**
+     * @ORM\Column(name="resultDisplay", type="string", columnDefinition="enum('ONLYSCORE', 'HIDEANSWER', 'SHOWANSWER')")
+     */
+
+    private $resultDisplay;
 
     public function __construct()
     {
@@ -133,5 +145,17 @@ class Quiz
         }
 
         return $this;
+    }
+
+    public function setResultDisplay($status)
+    {
+        if (!in_array($status, array(self::ONLYSCORE, self::HIDEANSWER, self::SHOWANSWER))) {
+            throw new \InvalidArgumentException("Invalid display result");
+        }
+        $this->status = $status;
+    }
+
+    public function getResultDisplay() {
+        return $this -> status;
     }
 }
