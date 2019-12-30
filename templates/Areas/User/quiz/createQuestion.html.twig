@@ -32,3 +32,15 @@
     </div>
 </div>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+    $('#form_Answer3').on('change', function() {
+        $('#form_GoodAnswer').append($('<option>').val('Réponse 3').text('Réponse 3'));
+    
+    });
+    $('#form_Answer4').on('change', function() {
+        $('#form_GoodAnswer').append($('<option>').val('Réponse 4').text('Réponse 4'));
+    });
+</script>
+{% endblock %}

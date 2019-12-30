@@ -107,10 +107,8 @@ class QuizController extends AbstractController
           ->add('Answer4', TextType::class, ['label' => 'Réponse 4', 'required' => false])
           ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
             'choices' => [
-                '1' => 'Réponse 1',
-                '2' => 'Réponse 2',
-                '3' => 'Réponse 3',
-                '4' => 'Réponse 4',
+                'Réponse 1' => 'Réponse 1',
+                'Réponse 2' => 'Réponse 2',
             ],
             'placeholder' => 'Choix',
           ])
