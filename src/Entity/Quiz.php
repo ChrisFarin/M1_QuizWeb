@@ -147,15 +147,17 @@ class Quiz
         return $this;
     }
 
-    public function setResultDisplay($status)
+    public function setResultDisplay($resultDisplay) : self
     {
-        if (!in_array($status, array(self::ONLYSCORE, self::HIDEANSWER, self::SHOWANSWER))) {
+        if (!in_array($resultDisplay, array(self::ONLYSCORE, self::HIDEANSWER, self::SHOWANSWER))) {
             throw new \InvalidArgumentException("Invalid display result");
         }
-        $this->status = $status;
+        $this->resultDisplay = $resultDisplay;
+
+        return $this;
     }
 
-    public function getResultDisplay() {
-        return $this -> status;
+    public function getResultDisplay(): ?string {
+        return $this -> resultDisplay;
     }
 }

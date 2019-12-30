@@ -110,7 +110,7 @@ class QuizController extends AbstractController
                 'Réponse 1' => 'Réponse 1',
                 'Réponse 2' => 'Réponse 2',
             ],
-            'placeholder' => 'Choix',
+            'placeholder' => 'Veuillez sélectionner une bonne réponse.',
           ])
           ->add('Submit', SubmitType::class)
           ->setMethod('GET')

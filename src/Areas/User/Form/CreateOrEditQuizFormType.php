@@ -7,6 +7,7 @@ use App\Entity\Quiz;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,6 +29,14 @@ class CreateOrEditQuizFormType extends AbstractType
                 'label' => 'Visible'
 
             ])
+            ->add('resultDisplay', ChoiceType::class, ['label' => 'Type d\' affichage des résultats',
+            'choices' => [
+                'Seulement le score' => Quiz::ONLYSCORE,
+                'Mentionne si l\'utilisateur a correctement répondu ou non' => Quiz::HIDEANSWER,
+                'Affiche toutes les réponses' => Quiz::SHOWANSWER
+            ],
+            'placeholder' => 'Veuillez sélectionner un type d\'affichage.',
+          ])
             ->setMethod('GET')
         ;
     }
