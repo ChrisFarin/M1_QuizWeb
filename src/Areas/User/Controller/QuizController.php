@@ -135,8 +135,8 @@ class QuizController extends AbstractController
                         '4' => 'Réponse 4',
                     ],
                     'placeholder' => 'Choix',
-                  ])
-                else {
+                  ]);
+                  } else {
                   $form ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
                     'choices' => [
                         '1' => 'Réponse 1',
@@ -144,7 +144,7 @@ class QuizController extends AbstractController
                         '3' => 'Réponse 3',
                     ],
                     'placeholder' => 'Choix',
-                  ])
+                  ]);
                 }
               } else {
                 $form ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
@@ -153,7 +153,7 @@ class QuizController extends AbstractController
                           '2' => 'Réponse 2',
                       ],
                       'placeholder' => 'Choix',
-                    ])
+                    ]);
               }
           }
         );
