@@ -1,0 +1,16 @@
+{% extends 'Areas/User/base.html.twig' %}
+
+{% block body %}
+
+<div class="row align-center">
+    <div class="small-12 medium-6 columns">
+        {% for question in questions %}
+            {{ question.entitled }}
+            {% for response in question.answers %}
+                {{ response.entitled }}
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

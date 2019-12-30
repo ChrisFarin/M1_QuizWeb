@@ -26,7 +26,7 @@
         <tbody>
           {% for quiz in quizs%}
              <tr>
-               <td>{{ quiz.Name}}</td>
+               <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
                <td>Style à revoir ! Lien à rendre cliquable vers ... je sais pas ? !</td>
              </tr>
           {% endfor %}

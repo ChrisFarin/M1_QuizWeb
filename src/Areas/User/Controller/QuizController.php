@@ -146,4 +146,29 @@ class QuizController extends AbstractController
             'MyQuizsMenu' => true,
         ]);
     }
+
+
+    /**
+     * @Route("/User/Quiz/doQuiz/{id}", name="app_do_quiz",  methods={"GET"})
+     */
+    public function doQuiz(Request $request, $id)
+    {
+      $quiz = $this->getDoctrine()
+            ->getRepository(Quiz::class)
+            ->find($id);
+
+      if (!$quiz) {
+          throw $this->createNotFoundException(
+              'No quiz found for id '.$id
+          );
+      }
+      $questions = $quiz -> getQuestions();
+      return $this->render('Areas/User/quiz/doQuiz.html.twig', [
+        'quizId'   => $id,
+        'hideNavBar' => true,
+        'questions' => $questions, 
+    ]);
+
+
+    }
 }
