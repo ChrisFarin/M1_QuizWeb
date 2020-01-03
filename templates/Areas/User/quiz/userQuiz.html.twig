@@ -1,12 +1,15 @@
 {% extends 'Areas/User/base.html.twig' %}
 
 {% block title %}
-  SYB - Accueil
+  Vos quizs
 {% endblock %}
 
 {% block body %}
   <div class="row">
     <div class="small-12 columns">
+    <div class="text-center">
+      <h1>Liste de vos quizs</h1>
+    </div>
     {% if quizs|length == 0 %}
       <div class="center-text">
           Aucun quiz trouvé

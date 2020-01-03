@@ -61,3 +61,8 @@ label {
 i {
     margin-left:$global-margin;
 }
+
+[data-dropdown-menu] {
+    border:1px solid $primary-color;
+    border-radius:7%;
+}

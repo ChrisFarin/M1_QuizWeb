@@ -1,8 +1,9 @@
 {% extends 'Areas/User/base.html.twig' %}
+{% set isCreating = (isEditing is not defined or isEditing == null or not isEditing) %}
+{% block title %}{% if isCreating %} Création d'un quiz{% else %} Edition du quiz {{quizName }} {% endif %} {% endblock %}
 
 {% block body %}
 
-{% set isCreating = (isEditing is not defined or isEditing == null or not isEditing) %}
 <div class="row align-center">
     <div class="small-12 medium-6 columns border-quiz">
         <h1 class="center-text title-quiz title-quiz">{% if isCreating %} Création d'un quiz{% else %} Edition du quiz {{quizName }} {% endif %}</h1>
