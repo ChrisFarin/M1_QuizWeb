@@ -2,11 +2,11 @@
 
 {% block title %}Création question{% endblock %}
 
-
 {% block body %}
+{% set isCreating = (isEditing is not defined or isEditing == null or not isEditing) %}
 <div class="row align-center">
     <div class="small-12 medium-6 columns border-quiz">
-        <h1 class="title_quiz">Création d'une question pour le quiz {{ quizName }}</h1>
+        <h1 class="title_quiz">{% if isCreating %} Création {% else %} Edition {% endif %} d'une question pour le quiz {{ quizName }}</h1>
         {% if test is defined %}
 
         {{test }}

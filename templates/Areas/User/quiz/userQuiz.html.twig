@@ -32,7 +32,7 @@
         <tbody>
           {% for quiz in quizs%}
              <tr>
-               <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
+               <td><a href="{{url('app_quiz_question', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
                <td> {{ quiz.questions|length}} </td>
                <td> {% if quiz.IsVisible %} <i class="fa fa-check" title="Le quiz est public"></i> {% else %} <i class="fa fa-times" title="Le quiz est privé"></i> {% endif %}</td>
                <td> <a href="{{url('app_do_quiz', {'id': quiz.id, 'test': true})}}">

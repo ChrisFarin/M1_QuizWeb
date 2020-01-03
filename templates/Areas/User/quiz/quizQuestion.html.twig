@@ -1,0 +1,50 @@
+{% extends 'Areas/User/base.html.twig' %}
+
+{% block title %}
+  SYB - Accueil
+{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="small-12 columns">
+    {% if quizs.questions|length == 0 %}
+      <div class="center-text">
+          Aucune question trouvée
+      </div>
+    {% else %}
+      <table>
+        <thead>
+          <tr>
+            <th> 
+              Intitulé
+            </th>
+            <th>
+              Nombre de réponse
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for question in quizs.questions%}
+             <tr>
+               <td><a href="">{{ question.entitled}}</a></td>
+               <td> {{ question.answers|length}} </td>
+               <td> <a href="{{url('app_edit_question', {'id': question.id})}}">
+                      <i class="fa fa-pencil-alt" title="Editer la question"></i>
+                    </a>
+                    <a href="{{url('app_delete_quiz', {'id': quizs.id})}}">
+                        <i class="fa fa-times" title="Supprimer le quiz"></i>
+                    </a>
+                </td>
+             </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    </div>
+  </div>
+  
+
+{% endblock %}

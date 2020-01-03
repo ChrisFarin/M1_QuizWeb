@@ -90,6 +90,7 @@ class QuizController extends AbstractController
             'MyQuizsMenu' => true,
             'isEditing' => true,
             'quizId' => $id,
+            'quizName' => $quiz->getName(),
 
         ]);
     }
@@ -99,7 +100,7 @@ class QuizController extends AbstractController
      */
     public function createQuestion(Request $request, $id)
     {
-
+        
         $defaultData = [];
         $form = $this->createFormBuilder($defaultData)
           ->add('Question', TextType::class, ['label' => 'Question*'])
@@ -178,11 +179,112 @@ class QuizController extends AbstractController
             return $this->redirectToRoute('app_create_question', ['id' => $id]);
         }
 
-         return $this->render('Areas/User/quiz/createQuestion.html.twig', [
+         return $this->render('Areas/User/quiz/createOrEditQuestion.html.twig', [
             'quizId'   => $id,
             'quizName' => $quiz->getName(),
             'CreateQuestionForm' => $form->createView(),
             'MyQuizsMenu' => true,
+        ]);
+    }
+
+    /**
+     * @Route("/User/Quiz/editQuestion/{id}", name="app_edit_question",  methods={"GET"})
+     */
+    public function editQuestion(Request $request, $id)
+    {
+        $question = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->find($id);
+
+        if (!$question) {
+            throw $this->createNotFoundException(
+                'No question found for id '.$id
+            );
+        }
+        $r1 = $question ->getAnswers()[0];
+        $r2 = $question ->getAnswers()[1];
+        $r3 = $question ->getAnswers()[2];
+        $r4 = $question ->getAnswers()[3];
+        
+        $defaultData = ['Question' => $question-> getEntitled(), 'Answer1' => $r1->getEntitled(),
+        'Answer2' => $r2->getEntitled(),
+        'Answer3' => $r3->getEntitled(),
+        'Answer4' => $r4->getEntitled(),
+        'GoodAnswer' => $r1->getIsRightAnswer() ? 'Réponse 1' : $r2->getIsRightAnswer() ? 'Réponse 2' : $r3 -> getIsRightAnswer() ? 'Réponse 3' : 'Réponse 4', ];
+        $form = $this->createFormBuilder($defaultData)
+          ->add('Question', TextType::class, ['label' => 'Question*'])
+          ->add('Answer1', TextType::class, ['label' => 'Réponse 1*'])
+          ->add('Answer2', TextType::class, ['label' => 'Réponse 2*'])
+          ->add('Answer3', TextType::class, ['label' => 'Réponse 3', 'required' => false])
+          ->add('Answer4', TextType::class, ['label' => 'Réponse 4', 'required' => false])
+          ->add('GoodAnswer', ChoiceType::class, ['label' => 'Choisissez la bonne réponse',
+            'choices' => [
+                'Réponse 1' => 'Réponse 1',
+                'Réponse 2' => 'Réponse 2',
+                'Réponse 3' => 'Réponse 3',
+                'Réponse 4' => 'Réponse 4',
+            ],
+            'placeholder' => 'Veuillez sélectionner une bonne réponse.',
+          ])
+          ->add('Submit', SubmitType::class, ['label' => 'Editer la question'])
+          ->setMethod('GET')
+          ->setAction($this->generateUrl('app_edit_question', ['id' => $id, ]))
+          ->getForm();
+
+        
+        $form->handleRequest($request);
+
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $data = $form -> getData();
+            $question->setEntitled($data['Question']);
+            $entityManager->persist($question);
+            foreach($question->getAnswers() as $answer) {
+                $question ->removeAnswer($answer);
+            }
+
+            if ($data['Answer1'] != NULL) {
+              $r1 = new Answer();
+              $r1->setEntitled($data['Answer1']);
+              $r1->setQuestion($question);
+              $r1->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 1');
+              $entityManager->persist($r1);
+            }
+            if ($data['Answer2'] != NULL) {
+              $r2 = new Answer();
+              $r2->setEntitled($data['Answer2']);
+              $r2->setQuestion($question);
+              $r2->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 2');
+              $entityManager->persist($r2);
+            }
+            if ($data['Answer3'] != NULL) {
+              $r3 = new Answer();
+              $r3->setEntitled($data['Answer3']);
+              $r3->setQuestion($question);
+              $r3->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 3');
+              $entityManager->persist($r3);
+            }
+            if ($data['Answer4'] != NULL) {
+              $r4= new Answer();
+              $r4->setEntitled($data['Answer4']);
+              $r4->setQuestion($question);
+              $r4->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 4');
+              $entityManager->persist($r4);
+            }
+
+            $entityManager->flush();
+            return $this->redirectToRoute('app_user_quiz');
+        }
+
+         return $this->render('Areas/User/quiz/createOrEditQuestion.html.twig', [
+            'quizId'   => $id,
+            'CreateQuestionForm' => $form->createView(),
+            'MyQuizsMenu' => true,
+            'quizName' => $question -> getQuiz() -> getName(),
+            'isEditing' => true
         ]);
     }
 
@@ -238,6 +340,23 @@ class QuizController extends AbstractController
             ['MyQuizsMenu' => true, 'quizs' => $quizs , ]);
     }
 
+    /**
+     * @Route("/User/Quiz/QuizQuestions/{id}", name="app_quiz_question")
+     */
+    public function quizQuestions(Request $request, Security $security, $id)
+    {
+      $usr = $security->getUser();
+      $quizs = $this->getDoctrine()
+      ->getRepository(Quiz::class)
+      ->find($id);
+      if ($usr->getId() != $quizs->getAuthor()->getId()) {
+        return $this->redirectToRoute('app_user_quiz');
+      }
+      
+
+      return $this->render('Areas/User/quiz/quizQuestion.html.twig',
+            ['MyQuizsMenu' => true, 'quizs' => $quizs , ]);
+    }
 
     /**
      * @Route("/User/Quiz/DeleteQuiz/{id}", name="app_delete_quiz")
