@@ -36,10 +36,19 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $users = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+
+            if (count($users) == 0) {
+                $roles[] = 'ROLE_ADMIN';
+                $user -> setRoles($roles);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
 
             // do anything else you need here, like send an email
 
