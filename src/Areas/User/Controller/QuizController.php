@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Quiz;
 use App\Entity\Question;
 use App\Entity\Answer;
+use App\Entity\Score;
 use App\Areas\User\Form\CreateOrEditQuizFormType;
 use App\Areas\User\Form\CreateQuestionFormType;
 use App\Areas\User\Security\Authenticator;
@@ -254,15 +255,40 @@ class QuizController extends AbstractController
     /**
      * @Route("/User/Quiz/SaveResult", name="app_save_result",  methods={"POST"})
      */
-    public function saveResult(Request $request)
+    public function saveResult(Request $request, Security $security)
     {
         $array = $request->request->get('array');
         $quizId = $request->request->get('quizId');
         $nbGoodAnswer = $request->request->get('nbGoodAnswer');
-        if (count($array) > 0) {
-            return new JsonResponse(['data' => 123]);
+        $quiz = $this->getDoctrine()
+         ->getRepository(Quiz::class)
+         ->find($quizId);
+
+        $score = new Score(); 
+        $score->setTotalAnswer(count($quiz->getQuestions()));
+        $score->setQuiz($quiz);
+        $score->setRightAnswer($nbGoodAnswer);
+        $usr = $security->getUser();
+        if (!$usr) {
+            $score->setPlayer(NULL);
         } else {
-            return new JsonResponse(['data' => 100]);
+            $score->setPlayer($usr);
         }
+        
+        foreach ($quiz -> getQuestions() as $question) {
+            $question->setTotalAnswered($question->getTotalAnswered()+1);
+            $idAnswer = $array[$question->getId()];
+            foreach ($question -> getAnswers() as $answer) {
+                if ($answer-> getId() == $idAnswer) {
+                    if ($answer -> getIsRightAnswer()) {
+                        $question->setAnsweredRight($question->getAnsweredRight()+1);
+                    }
+                }
+            }
+        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($score);
+        $entityManager->flush();
+        return new JsonResponse(['code' => 200]);
     }
 }

@@ -107,7 +107,7 @@
             $.ajax({
                 method: "POST",
                 url: '{{ url("app_save_result")}}',
-                data: { array:  resultTest, quizId : quiz.id, nbGoodAnswer : rightAnswer}
+                data: { array:  resultTest, quizId : {{quiz.id}}, nbGoodAnswer : rightAnswer}
                 })
                 .done(function( msg ) {
                     alert( "Data Saved: " + msg );
