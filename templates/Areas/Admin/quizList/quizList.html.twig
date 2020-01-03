@@ -1,0 +1,52 @@
+{% extends 'Areas/Admin/base.html.twig' %}
+
+{% block title %}
+  SYB - Accueil
+{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="small-12 columns">
+    {% if quizs|length == 0 %}
+      <div class="center-text">
+          Aucun quiz trouvé
+      </div>
+    {% else %}
+      <table>
+        <thead>
+          <tr>
+            <th> 
+              Nom
+            </th>
+            <th>
+              Nombre de questions
+            </th>
+            <th>
+              Visible
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quiz in quizs%}
+             <tr>
+               <td><a href="{{url('app_quiz_question', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
+               <td> {{ quiz.questions|length}} </td>
+               <td> {% if quiz.IsVisible %} <i class="fa fa-check" title="Le quiz est public"></i> {% else %} <i class="fa fa-times" title="Le quiz est privé"></i> {% endif %}</td>
+               <td> 
+                    <a href="{{url('app_admin_delete_quiz', {'id': quiz.id})}}">
+                        <i class="fa fa-times" title="Supprimer le quiz"></i>
+                    </a>
+                </td>
+             </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    </div>
+  </div>
+  
+
+{% endblock %}

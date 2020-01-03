@@ -29,7 +29,8 @@
         <div class="row">
         <div class="small-12 columns">
             <ul class="menu">
-            <li class=" is-active"><a href="{{url('app_admin')}}">Liste des utilisateurs</a></li>
+            <li class="{% if UserListMenu is defined and UserListMenu %} is-active {% endif %}"><a href="{{url('app_admin')}}">Liste des utilisateurs</a></li>
+            <li class="{% if QuizListMenu is defined and QuizListMenu %} is-active {% endif %}"><a href="{{url('app_quizList')}}">Liste des quiz</a></li>
             </ul>
         </div>
 

@@ -19,7 +19,7 @@ class IndexController extends AbstractController
         $users = $this->getDoctrine()
             ->getRepository(User::class)
             ->findAll();
-        return $this->render('Areas/Admin/index/index.html.twig', ['users' => $users]);
+        return $this->render('Areas/Admin/index/index.html.twig', ['users' => $users, 'UserListMenu' => true]);
     }
 
     
