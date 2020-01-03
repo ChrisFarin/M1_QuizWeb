@@ -1,0 +1,41 @@
+{% extends 'Areas/User/base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+<div class="row align-center">
+    <div class="small-12 medium-9 columns ">
+        {% if questionsResults|length == 0 %}
+            <div class="center-text border-quiz" >Aucune statistiques ne peut être générée pour le quiz "{{quizName}}"</div>
+
+
+        {% else %}
+        <div class="row align-center">
+            <div class='small-12 columns'>
+                <div class='center-text border-quiz'>
+                    La moyenne du quiz "{{quizName}}" est de {{mean}} / {{questionsResults|length}}.
+                </div>
+            </div>
+            {% for i in 0..questionsResults|length - 1 %}
+                <div class="small-12 medium-3 columns border-quiz text-center">
+                    Question : {{questionsEntitled[i]}}
+                    {% if questionsResults[i] >= 50 %}
+                        <div class="rightAnswer text-center">
+                            Pourcentage de bonne réponse :{{questionsResults[i]}}%
+                        </div>
+                    
+                    {% else %}
+                        <div class="wrongAnswer text-center">
+                            Pourcentage de bonne réponse :{{questionsResults[i]}}%
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

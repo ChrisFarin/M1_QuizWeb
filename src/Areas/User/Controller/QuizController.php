@@ -426,4 +426,55 @@ class QuizController extends AbstractController
         $entityManager->flush();
         return new JsonResponse(['code' => 200]);
     }
+
+    /**
+     * @Route("/User/Quiz/statsQuiz/{id}", name="app_stats_quiz",  methods={"GET"})
+     */
+    public function statsQuiz(Request $request, Security $security, $id)
+    {
+        $quiz = $this->getDoctrine()
+              ->getRepository(Quiz::class)
+              ->find($id);
+        $scores = $this->getDoctrine()
+                ->getRepository(Score::class)
+                ->findByQuiz($id);
+        $total = 0;
+        $nb = 0;
+        foreach($scores as $score) {
+          if ($score->getTotalAnswer() == count($quiz->getQuestions())) {
+            $nb += 1;
+            $total = $score->getRightAnswer();
+          }
+        }
+        $mean = 0;
+        if ($nb == 0) {
+          $mean = $total / 1;
+        } else {
+          $mean = $total / $nb;
+        }
+        $questionsResults = array();
+        $questionsEntitled = array();
+        foreach($quiz -> getQuestions() as $question) {
+          $percent = ($question->getAnsweredRight() * 100) / $question->getTotalAnswered();
+          array_push($questionsResults, $percent);
+          array_push($questionsEntitled, $question->getEntitled());
+
+        }
+        
+
+        if (!$quiz) {
+            throw $this->createNotFoundException(
+                'No quiz found for id '.$id
+            );
+        }
+
+
+        return $this->render('Areas/User/quiz/statsQuiz.html.twig', [
+            'MyQuizsMenu' => true,
+            'quizName' => $quiz->getName(),
+            'mean' => $mean,
+            'questionsResults' => $questionsResults,
+            'questionsEntitled' => $questionsEntitled
+        ]);
+    }
 }

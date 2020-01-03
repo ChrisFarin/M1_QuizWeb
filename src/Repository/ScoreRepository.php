@@ -19,6 +19,25 @@ class ScoreRepository extends ServiceEntityRepository
         parent::__construct($registry, Score::class);
     }
 
+
+
+    // /**
+    //  * @return Score[] Returns an array of Score objects
+    //  */
+    
+    public function findByQuiz($quizId)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.Quiz = :val')
+            ->setParameter('val', $quizId)
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Score[] Returns an array of Score objects
     //  */
