@@ -34,15 +34,15 @@
              <tr>
                <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
                <td> {{ quiz.questions|length}} </td>
-               <td> {% if quiz.IsVisible %} <i class="fa fa-check"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</td>
+               <td> {% if quiz.IsVisible %} <i class="fa fa-check" title="Le quiz est public"></i> {% else %} <i class="fa fa-times"></i> {% endif %}</td>
                <td> <a href="{{url('app_edit_quiz', {'id': quiz.id})}}">
-                      <i class="fa fa-pencil-alt"></i>
+                      <i class="fa fa-pencil-alt" title="Editer le quiz"></i>
                     </a>
                     <a href="{{url('app_create_question', {'id': quiz.id})}}">
-                        <i class="fa fa-plus"></i>
+                        <i class="fa fa-plus" title="Ajouter une question"></i>
                     </a>
                     <a href="{{url('app_delete_quiz', {'id': quiz.id})}}">
-                        <i class="fa fa-times"></i>
+                        <i class="fa fa-times" title="Supprimer le quiz"></i>
                     </a>
                 </td>
              </tr>
