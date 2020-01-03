@@ -17,7 +17,7 @@ class Answer
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=65535)
      */
     private $Entitled;
 
@@ -30,11 +30,6 @@ class Answer
      * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="answers")
      */
     private $Question;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $AnsweredRight = 0;
 
     public function getId(): ?int
     {
@@ -77,15 +72,4 @@ class Answer
         return $this;
     }
 
-    public function getAnsweredRight(): ?int
-    {
-        return $this->AnsweredRight;
-    }
-
-    public function setAnsweredRight(int $AnsweredRight): self
-    {
-        $this->AnsweredRight = $AnsweredRight;
-
-        return $this;
-    }
 }

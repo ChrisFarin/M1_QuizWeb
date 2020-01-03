@@ -25,7 +25,7 @@ class Question
     private $Quiz;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=65535)
      */
     private $Entitled;
 
@@ -33,6 +33,16 @@ class Question
      * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy="Question", cascade={"remove"})
      */
     private $answers;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $AnsweredRight = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $TotalAnswered = 0;
 
     public function __construct()
     {
@@ -95,6 +105,30 @@ class Question
                 $answer->setQuestion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAnsweredRight(): ?int
+    {
+        return $this->AnsweredRight;
+    }
+
+    public function setAnsweredRight(int $AnsweredRight): self
+    {
+        $this->AnsweredRight = $AnsweredRight;
+
+        return $this;
+    }
+
+    public function getTotalAnswered(): ?int
+    {
+        return $this->TotalAnswered;
+    }
+
+    public function setTotalAnswered(int $TotalAnswered): self
+    {
+        $this->TotalAnswered = $TotalAnswered;
 
         return $this;
     }
