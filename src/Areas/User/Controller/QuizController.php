@@ -455,7 +455,11 @@ class QuizController extends AbstractController
         $questionsResults = array();
         $questionsEntitled = array();
         foreach($quiz -> getQuestions() as $question) {
-          $percent = ($question->getAnsweredRight() * 100) / $question->getTotalAnswered();
+          if ($question->getTotalAnswered() != 0) {
+            $percent = ($question->getAnsweredRight() * 100) / $question->getTotalAnswered();
+          } else {
+            $percent = ($question->getAnsweredRight() * 100);
+          }
           array_push($questionsResults, $percent);
           array_push($questionsEntitled, $question->getEntitled());
 

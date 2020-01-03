@@ -6,7 +6,7 @@
     {% endif %}
 
     {% if app.user %}
-        <div class="row align-right medium-offset-2">
+        <div class="row align-right">
             <div class="small-12 medium-3 columns ">
 
                 <ul class="dropdown menu" data-dropdown-menu>
@@ -15,7 +15,7 @@
                         <ul class="menu">
                         {% if is_granted('ROLE_ADMIN') %}
                         <li><a href="{{ url('app_admin') }}">Administration<i class="fa fa-user-tie"></i></a></li>
-                        <li><a href="{{ url('app_index') }}">Utilisateur<i class="fa fa-user"></i></a></li>
+                        <li><a href="{{ url('app_index') }}">Utilisation<i class="fa fa-user"></i></a></li>
                         {% endif %}
                         <li><a href="{{ url('app_logout') }}">Deconnexion<i class="fa fa-power-off"></i></a></li>
                         </ul>
