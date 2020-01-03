@@ -5,22 +5,22 @@
     var associativeQuestion = {};
     var associativeAnswer = {};
  </script>
-<div class="row align-center">
-    <div class="small-12 medium-6 columns">
+<div class="row align-center ">
+    <div class="small-12 medium-6 columns border-quiz">
         <div id="quizBlock">
             <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
             <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
             {% set questionForTest = 1 %}
             {% for question in quiz.questions %}
-                        <script> associativeQuestion[{{question.id}}] = '{{question.entitled}}';</script>
-                        <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled }}</span>
+                        <script> associativeQuestion[{{question.id}}] = '{{question.entitled | raw}}';</script>
+                        <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled | raw }}</span>
                         <div class="row align-center">
                             {% for response in question.answers %}
-                                <script> associativeAnswer[{{response.id}}] = '{{response.entitled}}';</script>
+                                <script> associativeAnswer[{{response.id}}] = '{{response.entitled | raw}}';</script>
 
                                 <div class="small-12 medium-6 columns">
                                     <div class="responseQuiz" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
-                                    {{ response.entitled }}
+                                    {{ response.entitled | raw}}
                                     </div>
                                 </div>
                             {% endfor %}

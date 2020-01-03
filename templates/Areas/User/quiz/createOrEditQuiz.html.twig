@@ -4,8 +4,8 @@
 
 {% set isCreating = (isEditing is not defined or isEditing == null or not isEditing) %}
 <div class="row align-center">
-    <div class="small-12 medium-6 columns">
-        <h1 class="center-text">{% if isCreating %} Création {% else %} Edition {% endif %} d'un quizz</h1>
+    <div class="small-12 medium-6 columns border-quiz">
+        <h1 class="center-text title-quiz">{% if isCreating %} Création {% else %} Edition {% endif %} d'un quiz</h1>
         {% set action = isCreating ? url('app_create_quiz') : url('app_edit_quiz', {'id': quizId}) %}
         {{ form_start(CreateOrEditQuizForm, {'action' : action}) }}
             {{ form_row(CreateOrEditQuizForm.Name) }}

@@ -5,8 +5,8 @@
 
 {% block body %}
 <div class="row align-center">
-    <div class="small-12 medium-6 columns">
-        <h1>Création d'une question pour le quiz {{ quizName }}</h1>
+    <div class="small-12 medium-6 columns border-quiz">
+        <h1 class="title_quiz">Création d'une question pour le quiz {{ quizName }}</h1>
         {% if test is defined %}
 
         {{test }}
@@ -26,7 +26,7 @@
         {{ form_end(CreateQuestionForm) }}
         <div class="center-text">
             <form action={{path("app_index")}} method="post">
-                <button type="submit" class="mar-top">Fin du quizz</button>
+                <button type="submit" class="mar-top button-button">Fin du quizz</button>
             </form>
         </div>
         <br />

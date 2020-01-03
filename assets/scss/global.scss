@@ -23,7 +23,7 @@
 }
 
 .button,button {
-    background-color:$primary-color !important;
+    background:linear-gradient($primary-color,$second-color) !important;
     color:white;
     padding:$global-padding !important;
 }

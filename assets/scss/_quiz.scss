@@ -1,14 +1,14 @@
 #quizName {
-    color:$primary-color;
+    color:white;
     border: 1px solid $primary-color;
-    border-radius: 2%;
+    border-radius: 10px;
     font-size: 2.5em;
     margin-bottom: $global-margin;
+    background: linear-gradient($primary-color,$second-color);
 }
 
 .questionQuiz {
-    border: 1px solid $primary-color;
-    border-radius: 2%;
+    color: $primary-color;
     font-size: 1.5em;
 }
 
@@ -17,7 +17,9 @@
     border: 1px solid $primary-color;
     border-radius: 2%;
     font-size: 1.0em;
-    background-color: none !important;
+    background: linear-gradient($primary-color, $second-color) !important;
+    color: white;
+    padding: $global-padding;
 }
 
 .wrongAnswer {
@@ -26,4 +28,18 @@
 
 .rightAnswer {
     background-color:green;
+}
+
+.border-quiz {
+    border: $primary-color 5px solid;
+	border-radius: 10px;
+    padding:$global-padding;
+    margin-bottom: $global-margin * 3;
+    box-shadow: 10px 10px 10px #AAAAAA;
+}
+
+.title-quiz {
+    background: linear-gradient($primary-color,$second-color);
+    border-radius: 10px;
+    color: white;
 }
