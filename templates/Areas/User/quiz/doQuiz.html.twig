@@ -5,9 +5,8 @@
     var associativeQuestion = {};
     var associativeAnswer = {};
  </script>
-<div class="row align-center ">
-    <div class="small-12 medium-6 columns border-quiz">
-        <div id="quizBlock">
+<div class="row align-center">
+    <div class="small-12 medium-6 columns" id="quizBlock">
             <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
             <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
             {% set questionForTest = 1 %}
@@ -20,7 +19,7 @@
 
                                 <div class="small-12 medium-6 columns">
                                     <div class="responseQuiz" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
-                                    {{ response.entitled | raw}}
+                                    {{ response.entitled | raw }}
                                     </div>
                                 </div>
                             {% endfor %}
@@ -28,15 +27,12 @@
                         </div>
                 {% set questionForTest = questionForTest + 1 %}
             {% endfor %}
-        </div>
-        <div id="resultBlock" class="hidden">
-        <div class="text-center"> Votre score est de <span id="score"> </span> / {{quiz.questions|length}} </div>
-
-
-         </div>
     </div>
-
-    
+    <div class='small-12 columns'>
+        <div class="text-center hidden" id="scoreSentence" > Votre score est de <span id="score"> </span> / {{quiz.questions|length}} </div>
+    </div>
+    <div id="resultBlock" class="hidden">
+    </div>
 
 </div>
 {% endblock %}
@@ -65,9 +61,10 @@
             $('#resultBlock').removeClass('hidden');
             var rightAnswer = 0;
             var onlyScoreDisplay = ('{{quiz.resultDisplay}}' == 'ONLYSCORE');
-            var displayQuestion = "<div class='row align-center'>";
+            var displayQuestion = '';
             {% for key in keys %}
                 if(!onlyScoreDisplay) {
+                    //$("#resultBlock").addClass('medium-3 small-12 columns');;
                     displayQuestion += "<div class='medium-3 small-12 columns'>";
                     displayQuestion += "<div class='row align-center'>";
                     displayQuestion += "<div class='small-12 columns'>";
@@ -78,30 +75,32 @@
                 if (resultTest[{{key}}] == {{result[key]}}) {
                     rightAnswer += 1;
                     displayQuestion += "<div class='medium-6 small-12 columns'>";
-                    displayQuestion += '<div class="rightAnswer">' + associativeAnswer[{{result[key]}}] + '</div>';
+                    displayQuestion += "<div class='rightAnswer'>" + associativeAnswer[{{result[key]}}] + "</div>";
                     displayQuestion += "</div>";
 
                 } else if(!onlyScoreDisplay) {
                     if ('{{quiz.resultDisplay}}' == 'SHOWANSWER') {
 
                         displayQuestion += "<div class='medium-6 small-12 columns'>";
-                        displayQuestion += '<div class="rightAnswer">' + associativeAnswer[{{result[key]}}] + '</div>';
+                        displayQuestion += "<div class='rightAnswer'>" + associativeAnswer[{{result[key]}}] + "</div>";
                         displayQuestion += "</div>";
 
                     }
                     displayQuestion += "<div class='medium-6 small-12 columns'>";
 
-                    displayQuestion += '<div class="wrongAnswer">' + resultTest[{{key}}] + '</div>';
+                    displayQuestion += "<div class='wrongAnswer'>" + associativeAnswer[resultTest[{{key}}]] + "</div>";
                     displayQuestion += "</div>";
-
-
                 }
-                displayQuestion += "</div>"
+                if(!onlyScoreDisplay) {
+                    displayQuestion += "</div>";
+                    displayQuestion += "</div>";
+                }
             {% endfor %}
-            displayQuestion += "</div>"
             $('#score').text(rightAnswer);
+            $('#scoreSentence').removeClass('hidden');
             if(!onlyScoreDisplay) {
-                $('#resultBlock').append(displayQuestion);
+
+                $('#resultBlock').replaceWith(displayQuestion);
             }
             // Ajax pour stocker les résultats
             $.ajax({
@@ -110,7 +109,7 @@
                 data: { array:  resultTest, quizId : {{quiz.id}}, nbGoodAnswer : rightAnswer}
                 })
                 .done(function( msg ) {
-                    alert( "Data Saved: " + msg );
+                    //alert( "Data Saved: " + msg );
                 });
             }
     })
