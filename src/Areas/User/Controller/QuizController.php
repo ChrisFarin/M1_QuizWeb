@@ -188,9 +188,9 @@ class QuizController extends AbstractController
 
 
     /**
-     * @Route("/User/Quiz/doQuiz/{id}", name="app_do_quiz",  methods={"GET"})
+     * @Route("/User/Quiz/doQuiz/{id}&{test}", name="app_do_quiz",  methods={"GET"})
      */
-    public function doQuiz(Request $request, $id)
+    public function doQuiz(Request $request, $id, $test = false)
     {
       $quiz = $this->getDoctrine()
             ->getRepository(Quiz::class)
@@ -217,7 +217,8 @@ class QuizController extends AbstractController
         'hideNavBar' => true,
         'quiz' => $quiz,
         'result' => $result,
-        'keys' => $keys
+        'keys' => $keys,
+        'isTest' => $test
     ]);
 
 
