@@ -30,6 +30,9 @@
                         <a href="{{url('app_admin_delete_user', {'id': user.id})}}">
                             <i class="fa fa-times" title="Supprimer l'utilisateur"></i>
                         </a>
+                        <a href="{{url('app_admin_up_user', {'id': user.id})}}">
+                            <i class="fa fa-user-tie" title="Définir l'utilisateur comme administrateur"></i>
+                        </a>
                         {% endif %}
                         </td>
                     </tr>
