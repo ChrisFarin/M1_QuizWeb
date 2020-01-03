@@ -373,7 +373,7 @@ class QuizController extends AbstractController
     }
 
     /**
-     * @Route("/User/Quiz/deleteQuestion/{id}", name="app_delete_question")
+     * @Route("/User/Quiz/deleteQuestion/{id}", name="app_delete_question", methods={"GET"})
      */
     public function deleteQuestion(Request $request, $id)
     {

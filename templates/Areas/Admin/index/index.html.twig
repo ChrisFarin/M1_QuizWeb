@@ -1,13 +1,43 @@
 {% extends 'Areas/Admin/base.html.twig' %}
 
-{% block title %}Index{% endblock %}
+{% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
-    <ul class="menu">
-    <li><a href="#">Bonjour {{ name }}</a></li>
-    <li><a href="#">Two</a></li>
-    <li><a href="#">Three</a></li>
-    <li><a href="#">Four</a></li>
-    </ul>
+    <div class="row">
+        <div class='small-12 columns'>
+            {% if users|length == 0 %}
+            <div class="center-text">
+                Aucun utilisateur trouvé
+            </div>
+            {% else %}
+            <table>
+                <thead>
+                <tr>
+                    <th> 
+                    Nom
+                    </th>
+                    <th>
+                    Action
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users%}
+                    <tr>
+                    <td>{{ user.Username}}</a></td>
+                    <td> 
+                        {% if 'ROLE_ADMIN' not in user.Roles %}
+                        <a href="{{url('app_admin_delete_user', {'id': user.id})}}">
+                            <i class="fa fa-times" title="Supprimer l'utilisateur"></i>
+                        </a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            </div>
+      </div>
 
 {% endblock %}

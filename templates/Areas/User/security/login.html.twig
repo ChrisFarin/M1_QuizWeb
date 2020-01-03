@@ -13,7 +13,10 @@
                     <li>
                         <a href="#">{{ app.user.username }}</a>
                         <ul class="menu">
-                        <li><a href="{{ url('app_logout') }}">Deconnexion</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ url('app_admin') }}">Administration<i class="fa fa-user-tie"></i></a></li>
+                        {% endif %}
+                        <li><a href="{{ url('app_logout') }}">Deconnexion<i class="fa fa-power-off"></i></a></li>
                         </ul>
                     </li>
                 </ul>

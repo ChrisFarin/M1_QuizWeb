@@ -1,3 +1,6 @@
-controllers:
+UserArea:
     resource: ../../src/Areas/User/Controller/
+    type: annotation
+AdminArea:
+    resource: ../../src/Areas/Admin/Controller/
     type: annotation
