@@ -26,6 +26,12 @@ class ReceptionController extends AbstractController
         $quizs = $this->getDoctrine()
             ->getRepository(Quiz::class)
             ->getAllVisible();
+        // Pas très propre, devrait être fait dans le repo ..
+        for($i = 0; $i < count($quizs); ++$i) {
+            if (count($quizs[$i]->getQuestions()) == 0) {
+                unset($quizs[$i]);
+            }
+        }
 
 
 
