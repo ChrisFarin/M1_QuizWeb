@@ -373,6 +373,21 @@ class QuizController extends AbstractController
     }
 
     /**
+     * @Route("/User/Quiz/deleteQuestion/{id}", name="app_delete_question")
+     */
+    public function deleteQuestion(Request $request, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $question = $this->getDoctrine()
+        ->getRepository(Question::class)
+        ->find($id);
+      $quizId = $question ->getQuiz()->getId();
+      $entityManager->remove($question);
+      $entityManager->flush();
+      return $this->redirectToRoute('app_quiz_question', ['id' => $quizId]);
+    }
+
+    /**
      * @Route("/User/Quiz/SaveResult", name="app_save_result",  methods={"POST"})
      */
     public function saveResult(Request $request, Security $security)
