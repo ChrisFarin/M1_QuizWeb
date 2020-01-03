@@ -22,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class QuizController extends AbstractController
 {
@@ -248,5 +249,20 @@ class QuizController extends AbstractController
       $entityManager->remove($quiz);
       $entityManager->flush();
       return $this->redirectToRoute('app_user_quiz');
+    }
+
+    /**
+     * @Route("/User/Quiz/SaveResult", name="app_save_result",  methods={"POST"})
+     */
+    public function saveResult(Request $request)
+    {
+        $array = $request->request->get('array');
+        $quizId = $request->request->get('quizId');
+        $nbGoodAnswer = $request->request->get('nbGoodAnswer');
+        if (count($array) > 0) {
+            return new JsonResponse(['data' => 123]);
+        } else {
+            return new JsonResponse(['data' => 100]);
+        }
     }
 }
