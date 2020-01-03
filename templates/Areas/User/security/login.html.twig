@@ -6,7 +6,7 @@
     {% endif %}
 
     {% if app.user %}
-        <div class="row align-right">
+        <div class="row align-right medium-offset-2">
             <div class="small-12 medium-3 columns ">
 
                 <ul class="dropdown menu" data-dropdown-menu>
@@ -30,12 +30,11 @@
     {% else %}
 
     <form method="post" action="{{ url('app_login') }}">
-        <div class="row">
-            <div class="small-6 columns">
+        <div class="row align-right ">
+            <div class="small-1 medium-5 row ">
                 <label for="inputUsername">Nom de compte</label>
                     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-            </div>
-            <div class="small-6 columns">
+            
                 <label for="inputPassword">Mot de passe</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" required>
                 <div class="right-text">
@@ -62,7 +61,7 @@
         #}
 
 
-        </div>
+        
     </form>
     {% endif %}
 
