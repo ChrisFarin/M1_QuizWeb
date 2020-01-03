@@ -42,6 +42,7 @@ class IndexController extends AbstractController
      /**
      * @Route("/Admin/upUser/{id}", name="app_admin_up_user")
      */
+    /*
     public function upUser(Request $request, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -54,4 +55,5 @@ class IndexController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('app_admin');
     }
+    */
 }
