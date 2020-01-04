@@ -31,7 +31,7 @@
         <tbody>
           {% for question in quizs.questions%}
              <tr>
-               <td>{{ question.entitled}}</td>
+               <td>{{ question.entitled | raw}}</td>
                <td> {{ question.answers|length}} </td>
                <td> <a href="{{url('app_edit_question', {'id': question.id})}}">
                       <i class="fa fa-pencil-alt" title="Editer la question"></i>
