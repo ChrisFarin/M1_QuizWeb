@@ -32,7 +32,7 @@
             {% endfor %}
     </div>
     <div class='small-12 columns'>
-        <div class="text-center hidden" id="scoreSentence" > Votre score est de <span id="score"> </span> / {{quiz.questions|length}} </div>
+        <div class="text-center hidden border-quiz" id="scoreSentence" > Votre score est de <span id="score"> </span> / {{quiz.questions|length}} </div>
     </div>
     <div id="resultBlock" class="hidden">
     </div>
@@ -68,7 +68,7 @@
             {% for key in keys %}
                 if(!onlyScoreDisplay) {
                     //$("#resultBlock").addClass('medium-3 small-12 columns');;
-                    displayQuestion += "<div class='medium-3 small-12 columns'>";
+                    displayQuestion += "<div class='medium-3 small-12 columns border-quiz'>";
                     displayQuestion += "<div class='row align-center'>";
                     displayQuestion += "<div class='small-12 columns'>";
                     displayQuestion += '<div class="text-center">' + associativeQuestion[{{key}}] + '</div>';
