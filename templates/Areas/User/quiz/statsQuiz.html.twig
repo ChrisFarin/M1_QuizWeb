@@ -1,6 +1,6 @@
 {% extends 'Areas/User/base.html.twig' %}
 
-{% block title %}Statistiques de {{quizName}}{% endblock %}
+{% block title %}Statistiques de {{quizName | raw}}{% endblock %}
 
 {% block body %}
 <div class="row align-center">
@@ -13,12 +13,12 @@
         <div class="row align-center">
             <div class='small-12 columns'>
                 <div class='center-text border-quiz'>
-                    La moyenne du quiz "{{quizName}}" est de {{mean}} / {{questionsResults|length}}.
+                    La moyenne du quiz "{{quizName | raw}}" est de {{mean}} / {{questionsResults|length}}.
                 </div>
             </div>
             {% for i in 0..questionsResults|length - 1 %}
                 <div class="small-12 medium-6 columns border-quiz center-text">
-                    Question : {{questionsEntitled[i]}}
+                    Question : {{questionsEntitled[i] | raw}}
                     {% if questionsResults[i] >= 50 %}
                         <div class="rightAnswer center-text">
                             Pourcentage de bonne réponse :{{questionsResults[i]}}% ({{questionsAnswers[i]}} / {{questionsTotal[i]}})
