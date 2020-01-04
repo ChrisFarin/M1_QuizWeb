@@ -9,7 +9,7 @@
  </script>
 <div class="row align-center">
     <div class="small-12 medium-6 columns" id="quizBlock">
-            <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name | raw}}</div>
+            <div id="quizName" class="center-text"> Nom du quiz: {{quiz.Name | raw}}</div>
             <div class="center-text"><button class="border-round" id="startButton">Commencer le quiz !</button> </div>
             {% set questionForTest = 1 %}
             {% for key in quiz.questions|keys|shuffle %}
@@ -84,20 +84,20 @@
                 if (resultTest[{{question.id}}] == {{result[question.id]}}) {
                     rightAnswer += 1;
                     displayQuestion += "<div class='medium-6 small-12 columns'>";
-                    displayQuestion += "<div class='rightAnswer'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
+                    displayQuestion += "<div class='rightAnswer center-text'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
                     displayQuestion += "</div>";
 
                 } else if(!onlyScoreDisplay) {
                     if ('{{quiz.resultDisplay}}' == 'SHOWANSWER') {
 
                         displayQuestion += "<div class='medium-6 small-12 columns'>";
-                        displayQuestion += "<div class='rightAnswer'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
+                        displayQuestion += "<div class='rightAnswer center-text'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
                         displayQuestion += "</div>";
 
                     }
                     displayQuestion += "<div class='medium-6 small-12 columns'>";
 
-                    displayQuestion += "<div class='wrongAnswer'>" + associativeAnswer[resultTest[{{question.id}}]] + "</div>";
+                    displayQuestion += "<div class='wrongAnswer center-text'>" + associativeAnswer[resultTest[{{question.id}}]] + "</div>";
                     displayQuestion += "</div>";
                 }
                 if(!onlyScoreDisplay) {
