@@ -8,13 +8,14 @@
   <div class="row">
     <div class="small-12 columns">
     <div class="text-center">
-      <h1>Liste de vos quizs</h1>
+      <h1 class="font-bungee" >Liste de vos quizs</h1>
     </div>
     {% if quizs|length == 0 %}
-      <div class="center-text">
+      <div class="center-text border-shadow">
           Aucun quiz trouvé
       </div>
     {% else %}
+      <div class="border-shadow">
       <table>
         <thead>
           <tr>
@@ -62,6 +63,7 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
     {% endif %}
     </div>
   </div>

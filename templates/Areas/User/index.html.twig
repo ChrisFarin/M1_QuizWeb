@@ -7,12 +7,13 @@
 {% block body %}
   <div class="row">
     <div class="small-12 columns">
-    <h1 class="center-text">Liste des quizs disponibles</h1>
+    <h1 class="center-text font-bungee">Liste des quizs disponibles</h1>
     {% if quizs|length == 0 %}
-      <div class="center-text">
+      <div class="center-text border-shadow">
           Aucun quiz trouvé
       </div>
     {% else %}
+    <div class="border-shadow">
       <table>
         <thead>
           <tr>
@@ -33,6 +34,7 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
     {% endif %}
     </div>
   </div>

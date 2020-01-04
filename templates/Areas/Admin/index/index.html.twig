@@ -5,11 +5,15 @@
 {% block body %}
     <div class="row">
         <div class='small-12 columns'>
+            <div class="text-center">
+                <h1 class="font-bungee" >Liste de utilisateurs</h1>
+            </div>
             {% if users|length == 0 %}
-            <div class="center-text">
+            <div class="center-text border-shadow">
                 Aucun utilisateur trouvé
             </div>
             {% else %}
+            <div class="border-shadow">
             <table>
                 <thead>
                 <tr>
@@ -36,6 +40,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+            </div>
             {% endif %}
             </div>
       </div>

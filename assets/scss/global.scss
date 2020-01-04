@@ -73,3 +73,18 @@ i {
         padding-right: 0px !important;
     }
 }
+
+@font-face {
+    font-family: ('bungee');
+    src: url('../font/Bungee-Regular.otf');
+}
+
+.font-bungee {
+    font-family: bungee;
+    font-size: 220%;
+    box-shadow: 3px 3px 12px #acacac;
+}
+
+.border-shadow {
+    box-shadow: 3px 3px 12px #acacac;
+}
