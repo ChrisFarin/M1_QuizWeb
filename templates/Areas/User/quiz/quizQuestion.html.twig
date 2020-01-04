@@ -7,13 +7,13 @@
 {% block body %}
   <div class="row">
     <div class="small-12 columns">
-    <a class="button" href="{{url('app_user_quiz')}}">Retour</a>
-    <h1 class="center-text">Liste des questions du quiz "{{quizs.name}}"</h1>
+    <h1 class="center-text font-bungee">Liste des questions du quiz "{{quizs.name}}"</h1>
     {% if quizs.questions|length == 0 %}
-      <div class="center-text">
+      <div class="center-text border-shadow">
           Aucune question trouvée
       </div>
     {% else %}
+    <div class="border-shadow">
       <table>
         <thead>
           <tr>
@@ -44,7 +44,11 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
     {% endif %}
+    <center>
+      <a class="button border-round" href="{{url('app_user_quiz')}}">Retour</a>
+    </center>
     </div>
   </div>
   

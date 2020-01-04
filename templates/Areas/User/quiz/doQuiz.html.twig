@@ -14,19 +14,21 @@
             {% set questionForTest = 1 %}
             {% for key in quiz.questions|keys|shuffle %}
                         {% set question = quiz.questions[key] %}
-                        <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled | raw }}</span>
-                        <div class="row align-center">
-                            {% for response in question.answers|shuffle %}
-                                <script> 
-                                var response = "{{response.entitled | escape('js') |raw}}";
-                                associativeAnswer[{{response.id}}] = response;</script>
+                        <div class="border-shadow">
+                            <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled | raw }}</span>
+                            <div class="row align-center">
+                                {% for response in question.answers|shuffle %}
+                                    <script> 
+                                    var response = "{{response.entitled | escape('js') |raw}}";
+                                    associativeAnswer[{{response.id}}] = response;</script>
 
-                                <div class="small-12 medium-6 columns">
-                                    <div class="responseQuiz border-round" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
-                                    {{ response.entitled | raw }}
+                                    <div class="small-12 medium-6 columns">
+                                        <div class="responseQuiz border-round" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
+                                        {{ response.entitled | raw }}
+                                        </div>
                                     </div>
+                                {% endfor %}
                                 </div>
-                            {% endfor %}
                             </div>
                         </div>
                 {% set questionForTest = questionForTest + 1 %}
@@ -38,7 +40,7 @@
     <div id="resultBlock" class="hidden">
     </div>
     <div class="small-12 columns center-text hidden" id="returnIndex">
-        <a class="button" href="{{url('app_index')}}"> Retour à l'accueil</a>
+        <a class="button border-round" href="{{url('app_index')}}"> Retour à l'accueil</a>
     </div>
 
 </div>

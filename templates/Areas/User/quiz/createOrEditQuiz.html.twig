@@ -14,7 +14,7 @@
             {{ form_widget(CreateOrEditQuizForm.isVisible)}}
             {{ form_widget(CreateOrEditQuizForm.resultDisplay)}}
             <div class="right-text">
-                <button class="btn">{% if isCreating %} Créer {% else %} Mettre à jour {% endif %}</button>
+                <button class="btn border-round">{% if isCreating %} Créer {% else %} Mettre à jour {% endif %}</button>
             </div>
         {{ form_end(CreateOrEditQuizForm) }}
     </div>
