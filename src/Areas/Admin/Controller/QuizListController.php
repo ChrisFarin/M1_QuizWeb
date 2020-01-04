@@ -16,14 +16,14 @@ class QuizListController extends AbstractController
      */
     public function quizList(AuthenticationUtils $authenticationUtils): Response
     {
-       
+
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         $quizs = $this->getDoctrine()
             ->getRepository(Quiz::class)
-            ->getAllVisible();
-        
+            ->findAll();
+
         return $this->render('Areas/Admin/quizList/quizList.html.twig', ['last_username' => $lastUsername, 'error' => $error,
             'QuizListMenu' => true, 'quizs' => $quizs ]);
     }
