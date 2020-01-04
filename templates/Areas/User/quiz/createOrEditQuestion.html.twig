@@ -5,9 +5,6 @@
 
 {% block body %}
 <div class="row align-center">
-    <div class="small-12 columns">
-        <a class="button" href="{{url('app_quiz_question', {'id': quizId})}}"> Retour </a>
-    </div>
     <div class="small-12 medium-6 columns border-quiz">
         <h1 class="title_quiz">{% if isCreating %} Création {% else %} Edition {% endif %} d'une question pour le quiz {{ quizName }}</h1>
         {% if test is defined %}
