@@ -77,7 +77,8 @@ Encore
     //.addEntry('admin', './assets/js/admin.js')
 
     .addPlugin(new CopyWebpackPlugin([
-        { from: './assets/images', to: 'images' }
+        { from: './assets/images', to: 'images' },
+        { from: './assets/font', to: 'font' }
     ]))
 ;
 
