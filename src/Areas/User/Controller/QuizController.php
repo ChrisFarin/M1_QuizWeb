@@ -441,7 +441,7 @@ class QuizController extends AbstractController
         foreach($scores as $score) {
           if ($score->getTotalAnswer() == count($quiz->getQuestions())) {
             $nb += 1;
-            $total = $score->getRightAnswer();
+            $total = $total + $score->getRightAnswer();
           }
         }
         $mean = 0;
