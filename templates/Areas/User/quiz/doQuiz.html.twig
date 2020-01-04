@@ -11,7 +11,7 @@
 <div class="row align-center">
     <div class="small-12 medium-6 columns" id="quizBlock">
             <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
-            <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
+            <div class="center-text"><button class="border-round" id="startButton">Commencer le quiz !</button> </div>
             {% set questionForTest = 1 %}
             {% for question in quiz.questions|shuffle %}
                         <script> associativeQuestion[{{question.id}}] = '{{question.entitled | raw}}';</script>
@@ -21,7 +21,7 @@
                                 <script> associativeAnswer[{{response.id}}] = '{{response.entitled | raw}}';</script>
 
                                 <div class="small-12 medium-6 columns">
-                                    <div class="responseQuiz" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
+                                    <div class="responseQuiz border-round" data-answer="{{response.id}}" data-answer-for="{{question.id}}">
                                     {{ response.entitled | raw }}
                                     </div>
                                 </div>

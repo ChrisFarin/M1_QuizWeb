@@ -30,10 +30,10 @@
           <div class="row">
             <div class="small-12 columns">
               <ul class="menu">
-                <li class="{% if QuizListMenu is defined and QuizListMenu %} is-active {% endif %}"><a href="{{url('app_index')}}">Liste des quizs</a></li>
+                <li class="{% if QuizListMenu is defined and QuizListMenu %} is-active {% endif %}"><a class="border-round" href="{{url('app_index')}}">Liste des quizs</a></li>
                 {% if app.user %}
-                  <li class="{% if MyQuizsMenu is defined and MyQuizsMenu %} is-active {% endif %}" ><a href="{{url('app_user_quiz')}}">Mes quizs</a></li>
-                  <li class="{% if CreateQuizMenu is defined and CreateQuizMenu %} is-active {% endif %}" ><a href="{{url('app_create_quiz')}}">Créer un quiz</a></li>
+                  <li class="{% if MyQuizsMenu is defined and MyQuizsMenu %} is-active {% endif %}" ><a class="border-round" href="{{url('app_user_quiz')}}">Mes quizs</a></li>
+                  <li class="{% if CreateQuizMenu is defined and CreateQuizMenu %} is-active {% endif %}" ><a class="border-round" href="{{url('app_create_quiz')}}">Créer un quiz</a></li>
                 {% endif %}
               </ul>
             </div>
