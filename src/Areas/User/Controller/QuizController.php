@@ -314,13 +314,14 @@ class QuizController extends AbstractController
             }
           }
       }
+      $questions = $quiz -> getQuestions();
       return $this->render('Areas/User/quiz/doQuiz.html.twig', [
         'quizId'   => $id,
         'hideNavBar' => true,
         'quiz' => $quiz,
         'result' => $result,
         'keys' => $keys,
-        'isTest' => $test
+        'isTest' => $test,
     ]);
 
 

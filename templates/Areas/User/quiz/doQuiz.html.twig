@@ -1,5 +1,8 @@
 {% extends 'Areas/User/base.html.twig' %}
 
+{% block title %}
+    {{quiz.name}}
+{% endblock %}
 {% block body %}
 <script> 
     var associativeQuestion = {};
@@ -10,11 +13,11 @@
             <div id="quizName" class="text-center"> Nom du quiz: {{quiz.Name}}</div>
             <div class="center-text"><button id="startButton">Commencer le quiz !</button> </div>
             {% set questionForTest = 1 %}
-            {% for question in quiz.questions %}
+            {% for question in quiz.questions|shuffle %}
                         <script> associativeQuestion[{{question.id}}] = '{{question.entitled | raw}}';</script>
                         <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled | raw }}</span>
                         <div class="row align-center">
-                            {% for response in question.answers %}
+                            {% for response in question.answers|shuffle %}
                                 <script> associativeAnswer[{{response.id}}] = '{{response.entitled | raw}}';</script>
 
                                 <div class="small-12 medium-6 columns">
