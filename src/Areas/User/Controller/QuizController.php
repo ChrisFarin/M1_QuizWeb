@@ -208,8 +208,8 @@ class QuizController extends AbstractController
         
         $defaultData = ['Question' => $question-> getEntitled(), 'Answer1' => $r1->getEntitled(),
         'Answer2' => $r2->getEntitled(),
-        'Answer3' => $r3->getEntitled(),
-        'Answer4' => $r4->getEntitled(),
+        'Answer3' => $r3 == NULL ? '' : $r3->getEntitled(),
+        'Answer4' => $r4 == NULL ? '' : $r4->getEntitled(),
         'GoodAnswer' => $r1->getIsRightAnswer() ? 'Réponse 1' : $r2->getIsRightAnswer() ? 'Réponse 2' : $r3 -> getIsRightAnswer() ? 'Réponse 3' : 'Réponse 4', ];
         $form = $this->createFormBuilder($defaultData)
           ->add('Question', TextType::class, ['label' => 'Question*'])
