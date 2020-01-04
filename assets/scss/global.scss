@@ -67,7 +67,9 @@ i {
     border-radius:7%;
 }
 
-.supp-padding{
-    padding-left: 0px !important;
-    padding-right: 0px !important;
+@media only screen and (orientation:portrait) {
+    .supp-padding{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
 }
