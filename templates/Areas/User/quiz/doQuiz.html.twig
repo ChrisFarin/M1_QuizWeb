@@ -4,7 +4,7 @@
     {{quiz.name}}
 {% endblock %}
 {% block body %}
-<script> 
+<script>
     var associativeAnswer = {};
  </script>
 <div class="row align-center">
@@ -18,7 +18,7 @@
                             <div class="hidden center-text" data-question="{{question.id}}" data-test="{{questionForTest}}"><span class="questionQuiz">{{ question.entitled | raw }}</span>
                             <div class="row align-center">
                                 {% for response in question.answers|shuffle %}
-                                    <script> 
+                                    <script>
                                     var response = "{{response.entitled | escape('js') |raw}}";
                                     associativeAnswer[{{response.id}}] = response;</script>
 
@@ -63,7 +63,7 @@
         // On teste si une autre question existe
         resultTest[oldQuestion.data('question')] = $(this).data('answer');
         if (nextQuestion.length != 0) {
-            
+
             $('[data-test="' + questionNumber + '"]').removeClass('hidden');
         } else {
             $('#quizBlock').addClass('hidden');
@@ -74,7 +74,7 @@
             {% for question in quiz.questions %}
                 if(!onlyScoreDisplay) {
                     //$("#resultBlock").addClass('medium-3 small-12 columns');;
-                    displayQuestion += "<div class='medium-3 small-12 columns border-quiz'>";
+                    displayQuestion += "<div class='medium-6 small-12 columns border-quiz'>";
                     displayQuestion += "<div class='row align-center'>";
                     displayQuestion += "<div class='small-12 columns'>";
                     displayQuestion += '<div class="text-center">' + '{{question.entitled| escape("js") | raw}}' + '</div>';
