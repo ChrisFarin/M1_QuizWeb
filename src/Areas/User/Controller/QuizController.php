@@ -305,9 +305,7 @@ class QuizController extends AbstractController
       }
       $result = array();
       // Obliger d'envoyer les clés du tableau à partir du serveeur pour pouvoir itérer dessus en JS
-      $keys = array();
       foreach ($quiz -> getQuestions() as $question) {
-          array_push($keys, $question->getId());
           foreach ($question -> getAnswers() as $answer) {
             if ($answer-> getIsRightAnswer()) {
                 $result[$question->getId()] = $answer->getId();
@@ -320,7 +318,6 @@ class QuizController extends AbstractController
         'hideNavBar' => true,
         'quiz' => $quiz,
         'result' => $result,
-        'keys' => $keys,
         'isTest' => $test,
     ]);
 
