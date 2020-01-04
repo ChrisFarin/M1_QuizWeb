@@ -100,7 +100,7 @@ class QuizController extends AbstractController
      */
     public function createQuestion(Request $request, $id)
     {
-        
+
         $defaultData = [];
         $form = $this->createFormBuilder($defaultData)
           ->add('Question', TextType::class, ['label' => 'Question*'])
@@ -122,7 +122,7 @@ class QuizController extends AbstractController
           ->setAction($this->generateUrl('app_create_question', ['id' => $id, ]))
           ->getForm();
 
-        
+
         $form->handleRequest($request);
 
         $quiz = $this->getDoctrine()
@@ -205,7 +205,7 @@ class QuizController extends AbstractController
         $r2 = $question ->getAnswers()[1];
         $r3 = $question ->getAnswers()[2];
         $r4 = $question ->getAnswers()[3];
-        
+
         $defaultData = ['Question' => $question-> getEntitled(), 'Answer1' => $r1->getEntitled(),
         'Answer2' => $r2->getEntitled(),
         'Answer3' => $r3 == NULL ? '' : $r3->getEntitled(),
@@ -231,10 +231,10 @@ class QuizController extends AbstractController
           ->setAction($this->generateUrl('app_edit_question', ['id' => $id, ]))
           ->getForm();
 
-        
+
         $form->handleRequest($request);
 
-        
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -350,7 +350,7 @@ class QuizController extends AbstractController
       if ($usr->getId() != $quizs->getAuthor()->getId()) {
         return $this->redirectToRoute('app_user_quiz');
       }
-      
+
 
       return $this->render('Areas/User/quiz/quizQuestion.html.twig',
             ['MyQuizsMenu' => true, 'quizs' => $quizs , ]);
@@ -397,7 +397,7 @@ class QuizController extends AbstractController
          ->getRepository(Quiz::class)
          ->find($quizId);
 
-        $score = new Score(); 
+        $score = new Score();
         $score->setTotalAnswer(count($quiz->getQuestions()));
         $score->setQuiz($quiz);
         $score->setRightAnswer($nbGoodAnswer);
@@ -407,7 +407,7 @@ class QuizController extends AbstractController
         } else {
             $score->setPlayer($usr);
         }
-        
+
         foreach ($quiz -> getQuestions() as $question) {
             $question->setTotalAnswered($question->getTotalAnswered()+1);
             $idAnswer = $array[$question->getId()];
@@ -452,6 +452,8 @@ class QuizController extends AbstractController
         }
         $questionsResults = array();
         $questionsEntitled = array();
+        $questionsAnswers = array();
+        $questionsTotal = array();
         foreach($quiz -> getQuestions() as $question) {
           if ($question->getTotalAnswered() != 0) {
             $percent = ($question->getAnsweredRight() * 100) / $question->getTotalAnswered();
@@ -460,9 +462,12 @@ class QuizController extends AbstractController
           }
           array_push($questionsResults, $percent);
           array_push($questionsEntitled, $question->getEntitled());
+          array_push($questionsAnswers, $question->getAnsweredRight());
+          array_push($questionsTotal, $question->getTotalAnswered());
+
 
         }
-        
+
 
         if (!$quiz) {
             throw $this->createNotFoundException(
@@ -476,7 +481,9 @@ class QuizController extends AbstractController
             'quizName' => $quiz->getName(),
             'mean' => $mean,
             'questionsResults' => $questionsResults,
-            'questionsEntitled' => $questionsEntitled
+            'questionsEntitled' => $questionsEntitled,
+            'questionsAnswers' => $questionsAnswers,
+            'questionsTotal' => $questionsTotal
         ]);
     }
 }

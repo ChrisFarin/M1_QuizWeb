@@ -21,12 +21,12 @@
                     Question : {{questionsEntitled[i]}}
                     {% if questionsResults[i] >= 50 %}
                         <div class="rightAnswer text-center">
-                            Pourcentage de bonne réponse :{{questionsResults[i]}}%
+                            Pourcentage de bonne réponse :{{questionsResults[i]}}% ({{questionsAnswers[i]}} / {{questionsTotal[i]}})
                         </div>
-                    
+
                     {% else %}
                         <div class="wrongAnswer text-center">
-                            Pourcentage de bonne réponse :{{questionsResults[i]}}%
+                            Pourcentage de bonne réponse :{{questionsResults[i]}}% ({{questionsAnswers[i]}} / {{questionsTotal[i]}})
                         </div>
                     {% endif %}
                 </div>

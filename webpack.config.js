@@ -24,7 +24,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('js/app', './assets/js/foundation.js')
+    //.addEntry('js/app', './assets/js/foundation.js')
     //.addEntry('js/foundation', './node_modules/foundation-sites/dist/js/foundation.min.js')
     //.addEntry('js/jquery', './node_modules/jquery/dist/jquery.min.js')
     //.addEntry('page1', './assets/js/page1.js')
