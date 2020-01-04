@@ -84,20 +84,20 @@
                 if (resultTest[{{question.id}}] == {{result[question.id]}}) {
                     rightAnswer += 1;
                     displayQuestion += "<div class='medium-6 small-12 columns'>";
-                    displayQuestion += "<div class='rightAnswer'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
+                    displayQuestion += "<div class='rightAnswer center-text'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
                     displayQuestion += "</div>";
 
                 } else if(!onlyScoreDisplay) {
                     if ('{{quiz.resultDisplay}}' == 'SHOWANSWER') {
 
                         displayQuestion += "<div class='medium-6 small-12 columns'>";
-                        displayQuestion += "<div class='rightAnswer'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
+                        displayQuestion += "<div class='rightAnswer center-text'>" + associativeAnswer[{{result[question.id]}}] + "</div>";
                         displayQuestion += "</div>";
 
                     }
                     displayQuestion += "<div class='medium-6 small-12 columns'>";
 
-                    displayQuestion += "<div class='wrongAnswer'>" + associativeAnswer[resultTest[{{question.id}}]] + "</div>";
+                    displayQuestion += "<div class='wrongAnswer center-text'>" + associativeAnswer[resultTest[{{question.id}}]] + "</div>";
                     displayQuestion += "</div>";
                 }
                 if(!onlyScoreDisplay) {
