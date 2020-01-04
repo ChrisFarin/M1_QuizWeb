@@ -7,6 +7,7 @@
 {% block body %}
   <div class="row">
     <div class="small-12 columns">
+    <a class="button" href="{{url('app_user_quiz')}}">Retour</a>
     <h1 class="center-text">Liste des questions du quiz "{{quizs.name}}"</h1>
     {% if quizs.questions|length == 0 %}
       <div class="center-text">
@@ -30,7 +31,7 @@
         <tbody>
           {% for question in quizs.questions%}
              <tr>
-               <td><a href="">{{ question.entitled}}</a></td>
+               <td>{{ question.entitled}}</td>
                <td> {{ question.answers|length}} </td>
                <td> <a href="{{url('app_edit_question', {'id': question.id})}}">
                       <i class="fa fa-pencil-alt" title="Editer la question"></i>

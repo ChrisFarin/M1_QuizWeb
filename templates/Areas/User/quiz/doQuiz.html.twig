@@ -37,6 +37,9 @@
     </div>
     <div id="resultBlock" class="hidden">
     </div>
+    <div class="small-12 columns center-text hidden" id="returnIndex">
+        <a class="button" href="{{url('app_index')}}"> Retour à l'accueil</a>
+    </div>
 
 </div>
 {% endblock %}
@@ -102,6 +105,7 @@
             {% endfor %}
             $('#score').text(rightAnswer);
             $('#scoreSentence').removeClass('hidden');
+            $('#returnIndex').removeClass('hidden');
             if(!onlyScoreDisplay) {
 
                 $('#resultBlock').replaceWith(displayQuestion);
