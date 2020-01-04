@@ -27,9 +27,9 @@ class ReceptionController extends AbstractController
             ->getRepository(Quiz::class)
             ->getAllVisible();
         // Pas très propre, devrait être fait dans le repo ..
-        for($i = 0; $i < count($quizs); ++$i) {
-            if (count($quizs[$i]->getQuestions()) == 0) {
-                unset($quizs[$i]);
+        foreach(array_keys($quizs) as $key) {
+            if (count($quizs[$key]->getQuestions()) == 0) {
+                unset($quizs[$key]);
             }
         }
 
