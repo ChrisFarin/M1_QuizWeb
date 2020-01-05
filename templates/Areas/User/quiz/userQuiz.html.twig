@@ -19,7 +19,7 @@
       <table>
         <thead>
           <tr>
-            <th> 
+            <th>
               Nom
             </th>
             <th>
@@ -39,7 +39,7 @@
                <td><a href="{{url('app_quiz_question', {'id' : quiz.id})}}">{{ quiz.Name | raw}}</a></td>
                <td> {{ quiz.questions|length}} </td>
                <td> {% if quiz.IsVisible %} <i class="fa fa-check" title="Le quiz est public"></i> {% else %} <i class="fa fa-times" title="Le quiz est privé"></i> {% endif %}</td>
-               <td> 
+               <td>
                     <a href="{{url('app_stats_quiz', {'id': quiz.id, 'test': true})}}">
                       <i class="fa fa-signal" title="Statistiques du quiz"></i>
                     </a>
@@ -67,6 +67,6 @@
     {% endif %}
     </div>
   </div>
-  
+
 
 {% endblock %}

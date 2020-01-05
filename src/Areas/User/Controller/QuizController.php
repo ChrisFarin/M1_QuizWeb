@@ -174,7 +174,18 @@ class QuizController extends AbstractController
               $r4->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 4');
               $entityManager->persist($r4);
             }
-
+            $scores = $this->getDoctrine()
+            ->getRepository(Score::class)
+            ->findByQuiz($id);
+            if ($scores != null && (count($scores)) > 0) {
+               foreach($scores as $score) {
+                 $entityManager->remove($score);
+               }
+            }
+            foreach($quiz-> getQuestions() as $q) {
+              $q -> setAnsweredRight(0);
+              $q -> setTotalAnswered(0);
+            }
             $entityManager->flush();
             return $this->redirectToRoute('app_create_question', ['id' => $id]);
         }
@@ -274,7 +285,18 @@ class QuizController extends AbstractController
               $r4->setIsRightAnswer($data['GoodAnswer'] == 'Réponse 4');
               $entityManager->persist($r4);
             }
-
+            $scores = $this->getDoctrine()
+            ->getRepository(Score::class)
+            ->findByQuiz($id);
+            if ($scores != null && (count($scores)) > 0) {
+              foreach($scores as $score) {
+                $entityManager->remove($score);
+              }
+            }
+            foreach($question -> getQuiz() -> getQuestions() as $q) {
+              $q -> setAnsweredRight(0);
+              $q -> setTotalAnswered(0);
+            }
             $entityManager->flush();
             return $this->redirectToRoute('app_user_quiz');
         }
@@ -380,6 +402,18 @@ class QuizController extends AbstractController
         ->getRepository(Question::class)
         ->find($id);
       $quizId = $question ->getQuiz()->getId();
+      $scores = $this->getDoctrine()
+            ->getRepository(Score::class)
+            ->findByQuiz($id);
+      if ($scores != null && (count($scores)) > 0) {
+        foreach($scores as $score) {
+          $entityManager->remove($score);
+        }
+      }
+      foreach($question -> getQuiz() -> getQuestions() as $q) {
+        $q -> setAnsweredRight(0);
+        $q -> setTotalAnswered(0);
+      }
       $entityManager->remove($question);
       $entityManager->flush();
       return $this->redirectToRoute('app_quiz_question', ['id' => $quizId]);
