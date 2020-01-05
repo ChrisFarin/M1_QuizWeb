@@ -26,6 +26,9 @@
             <th>
               Meilleur score
             </th>
+            <th>
+              Nombre de questions
+            </th>
             {% if app.user %}
             <th>
                Votre meilleur score
@@ -39,6 +42,7 @@
                <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name | raw}}</a></td>
                <td> {{means[quiz.id]|round(2)}}</td>
                <td> {{bestScores[quiz.id]}}</td>
+               <td> {{questionsAmount[quiz.id]}}
                 {% if app.user %}
                   <td>
                     {{bestScoresUser[quiz.id]}}

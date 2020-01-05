@@ -42,6 +42,8 @@ class ReceptionController extends AbstractController
         $means = array();
         $bestScoresUser = array();
         $bestScores = array();
+        $questionsAmount = array();
+
 
         foreach($quizs as $quiz) {
             $scores = $this->getDoctrine()
@@ -80,13 +82,15 @@ class ReceptionController extends AbstractController
             } else {
                 $bestScoresUser[$quiz->getId()] = '-';
             }
+            $questionsAmount[$quiz->getId()] = count($quiz->getQuestions());
         }
     
 
 
         
         return $this->render('Areas/User/index.html.twig', ['last_username' => $lastUsername, 'error' => $error,
-            'QuizListMenu' => true, 'quizs' => $quizs, 'means' => $means, 'bestScoresUser' => $bestScoresUser, 'bestScores' => $bestScores ]);
+            'QuizListMenu' => true, 'quizs' => $quizs, 'means' => $means, 'bestScoresUser' => $bestScoresUser, 'bestScores' => $bestScores,
+            'questionsAmount' => $questionsAmount ]);
     }
 
     /**
