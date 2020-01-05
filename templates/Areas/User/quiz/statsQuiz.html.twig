@@ -13,7 +13,7 @@
         <div class="row align-center">
             <div class='small-12 columns'>
                 <div class='center-text border-quiz'>
-                    La moyenne du quiz "{{quizName | raw}}" est de {{mean}} / {{questionsResults|length}}.
+                    La moyenne du quiz "{{quizName | raw}}" est de {{mean |round(2)}} / {{questionsResults|length}}.
                 </div>
             </div>
             {% for i in 0..questionsResults|length - 1 %}

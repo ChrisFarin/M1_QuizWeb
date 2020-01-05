@@ -483,7 +483,7 @@ class QuizController extends AbstractController
         }
         $mean = 0;
         if ($nb == 0) {
-          $mean = $total / 1;
+          $mean = '-';
         } else {
           $mean = $total / $nb;
         }
@@ -503,13 +503,6 @@ class QuizController extends AbstractController
           array_push($questionsTotal, $question->getTotalAnswered());
 
 
-        }
-
-
-        if (!$quiz) {
-            throw $this->createNotFoundException(
-                'No quiz found for id '.$id
-            );
         }
 
 

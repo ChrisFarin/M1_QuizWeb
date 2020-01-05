@@ -3,6 +3,8 @@
 namespace App\Areas\User\Controller;
 
 use App\Entity\Quiz;
+use App\Entity\Score;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +15,7 @@ class ReceptionController extends AbstractController
     /**
      * @Route("/", name="app_index")
      */
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function index(AuthenticationUtils $authenticationUtils, Security $security): Response
     {
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
@@ -34,11 +36,57 @@ class ReceptionController extends AbstractController
         }
 
 
+        // Generation de stats pour l'affichage
+        $usr = $security->getUser();
+
+        $means = array();
+        $bestScoresUser = array();
+        $bestScores = array();
+
+        foreach($quizs as $quiz) {
+            $scores = $this->getDoctrine()
+                ->getRepository(Score::class)
+                ->findByQuiz($quiz->getId());
+            if ($scores == null) {
+                $bestScores[$quiz -> getId()] = '-';
+            } else {
+                $bestScores[$quiz -> getId()] = $scores[0]->getRightAnswer();
+            }
+            $total = 0;
+            $nb = 0;
+            foreach($scores as $score) {
+                if ($score->getTotalAnswer() == count($quiz->getQuestions())) {
+                    $nb += 1;
+                    $total = $total + $score->getRightAnswer();
+                }
+            }
+            $mean = 0;
+            if ($nb == 0) {
+                $mean = $total / 1;
+            } else {
+                $mean = $total / $nb;
+            }
+            $means[$quiz->getId()] = $mean;
+            if ($usr != null) {
+                $bestScore = $this->getDoctrine()
+                    ->getRepository(Score::class)
+                    ->getBestScoreByUserAndQuiz($usr ->getId(), $quiz->getId());
+                if ($bestScore == null) {
+                    $bestScoresUser[$quiz->getId()] = '-';
+                } else {
+                    $bestScoresUser[$quiz->getId()] = $bestScore[0]->getRightAnswer();
+
+                }
+            } else {
+                $bestScoresUser[$quiz->getId()] = '-';
+            }
+        }
+    
 
 
         
         return $this->render('Areas/User/index.html.twig', ['last_username' => $lastUsername, 'error' => $error,
-            'QuizListMenu' => true, 'quizs' => $quizs ]);
+            'QuizListMenu' => true, 'quizs' => $quizs, 'means' => $means, 'bestScoresUser' => $bestScoresUser, 'bestScores' => $bestScores ]);
     }
 
     /**

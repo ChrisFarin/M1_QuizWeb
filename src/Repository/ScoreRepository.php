@@ -30,8 +30,21 @@ class ScoreRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.Quiz = :val')
             ->setParameter('val', $quizId)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('s.RightAnswer', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getBestScoreByUserAndQuiz($userId, $quizId)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.Quiz = :val')
+            ->setParameter('val', $quizId)
+            ->andWhere('s.Player = :user')
+            ->setParameter('user', $userId)
+            ->orderBy('s.RightAnswer', 'ASC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
