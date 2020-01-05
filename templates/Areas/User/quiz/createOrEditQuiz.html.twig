@@ -1,6 +1,6 @@
 {% extends 'Areas/User/base.html.twig' %}
 {% set isCreating = (isEditing is not defined or isEditing == null or not isEditing) %}
-{% block title %}{% if isCreating %} Création d'un quiz{% else %} Edition du quiz {{quizName }} {% endif %} {% endblock %}
+{% block title %}{% if isCreating %} Création d'un quiz{% else %} Edition du quiz {{quizName | raw }} {% endif %} {% endblock %}
 
 {% block body %}
 

@@ -1,12 +1,12 @@
 {% extends 'Areas/User/base.html.twig' %}
 
-{% block title %}Statistiques de {{quizName | raw}}{% endblock %}
+{% block title %}Statistiques de {{quizName}}{% endblock %}
 
 {% block body %}
 <div class="row align-center">
     <div class="small-12 medium-9 columns ">
         {% if questionsResults|length == 0 %}
-            <div class="center-text border-quiz" >Aucune statistiques ne peut être générée pour le quiz "{{quizName}}"</div>
+            <div class="center-text border-quiz" >Aucune statistiques ne peut être générée pour le quiz "{{quizName | raw}}"</div>
 
 
         {% else %}

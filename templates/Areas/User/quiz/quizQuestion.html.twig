@@ -7,7 +7,7 @@
 {% block body %}
   <div class="row">
     <div class="small-12 columns">
-    <h1 class="center-text font-bungee">Liste des questions du quiz "{{quizs.name}}"</h1>
+    <h1 class="center-text font-bungee">Liste des questions du quiz "{{quizs.name | raw}}"</h1>
     {% if quizs.questions|length == 0 %}
       <div class="center-text border-shadow">
           Aucune question trouvée

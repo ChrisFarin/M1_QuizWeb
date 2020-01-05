@@ -36,7 +36,7 @@
         <tbody>
           {% for quiz in quizs%}
              <tr>
-               <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name}}</a></td>
+               <td><a href="{{url('app_do_quiz', {'id' : quiz.id})}}">{{ quiz.Name | raw}}</a></td>
                <td> {{means[quiz.id]|round(2)}}</td>
                <td> {{bestScores[quiz.id]}}</td>
                 {% if app.user %}
