@@ -318,7 +318,7 @@ class QuizController extends AbstractController
         return $this->redirectToRoute('app_index');
       }
       $questions = $quiz -> getQuestions();
-      if ($questions == null || count ($questions) == 0 || !($quiz ->getIsVisible())) {
+      if ($questions == null || count ($questions) == 0 || !($quiz ->getIsVisible()) && !$test) {
         return $this->redirectToRoute('app_index');
       }
       $result = array();
@@ -471,6 +471,14 @@ class QuizController extends AbstractController
               ->getRepository(Quiz::class)
               ->find($id);
         if ($quiz == null) {
+          return $this->redirectToRoute('app_index');
+        }
+        $usr = $security->getUser();
+        $author = $quiz -> getAuthor();
+        if ($usr == null) {
+          return $this->redirectToRoute('app_index');
+        }
+        if ($usr->getId() != $author->getId()) {
           return $this->redirectToRoute('app_index');
         }
         $scores = $this->getDoctrine()
