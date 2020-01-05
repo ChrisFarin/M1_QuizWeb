@@ -306,7 +306,7 @@ class QuizController extends AbstractController
 
 
     /**
-     * @Route("/User/Quiz/doQuiz/{id}&{test}", name="app_do_quiz",  methods={"GET"})
+     * @Route("/Quiz/doQuiz/{id}&{test}", name="app_do_quiz",  methods={"GET"})
      */
     public function doQuiz(Request $request, $id, $test = false)
     {
@@ -314,19 +314,22 @@ class QuizController extends AbstractController
             ->getRepository(Quiz::class)
             ->find($id);
 
-      if (!$quiz) {
+      if (!$quiz ) {
+        return $this->redirectToRoute('app_index');
+      }
+      $questions = $quiz -> getQuestions();
+      if ($questions == null || count ($questions) == 0 || !($quiz ->getIsVisible())) {
         return $this->redirectToRoute('app_index');
       }
       $result = array();
       // Obliger d'envoyer les clés du tableau à partir du serveeur pour pouvoir itérer dessus en JS
-      foreach ($quiz -> getQuestions() as $question) {
+      foreach ($questions as $question) {
           foreach ($question -> getAnswers() as $answer) {
             if ($answer-> getIsRightAnswer()) {
                 $result[$question->getId()] = $answer->getId();
             }
           }
       }
-      $questions = $quiz -> getQuestions();
       return $this->render('Areas/User/quiz/doQuiz.html.twig', [
         'quizId'   => $id,
         'hideNavBar' => true,
@@ -420,7 +423,7 @@ class QuizController extends AbstractController
     }
 
     /**
-     * @Route("/User/Quiz/SaveResult", name="app_save_result",  methods={"POST"})
+     * @Route("/Quiz/SaveResult", name="app_save_result",  methods={"POST"})
      */
     public function saveResult(Request $request, Security $security)
     {

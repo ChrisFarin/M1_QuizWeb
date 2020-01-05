@@ -30,7 +30,7 @@ class ScoreRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.Quiz = :val')
             ->setParameter('val', $quizId)
-            ->orderBy('s.RightAnswer', 'ASC')
+            ->orderBy('s.RightAnswer', 'DESC')
             ->getQuery()
             ->getResult()
         ;
@@ -43,7 +43,7 @@ class ScoreRepository extends ServiceEntityRepository
             ->setParameter('val', $quizId)
             ->andWhere('s.Player = :user')
             ->setParameter('user', $userId)
-            ->orderBy('s.RightAnswer', 'ASC')
+            ->orderBy('s.RightAnswer', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult()
