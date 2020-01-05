@@ -34,6 +34,9 @@ class IndexController extends AbstractController
         $user = $this->getDoctrine()
         ->getRepository(User::class)
         ->find($id);
+        if($user == null) {
+            return $this->redirectToRoute('app_index');
+          }
         $entityManager->remove($user);
         $entityManager->flush();
         return $this->redirectToRoute('app_admin');

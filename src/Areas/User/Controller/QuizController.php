@@ -68,9 +68,7 @@ class QuizController extends AbstractController
               ->find($id);
 
         if (!$quiz) {
-            throw $this->createNotFoundException(
-                'No quiz found for id '.$id
-            );
+          return $this->redirectToRoute('app_index');
         }
         $form = $this->createForm(CreateOrEditQuizFormType::class, $quiz);
         $form->handleRequest($request);
@@ -130,9 +128,7 @@ class QuizController extends AbstractController
             ->find($id);
 
         if (!$quiz) {
-            throw $this->createNotFoundException(
-                'No quiz found for id '.$id
-            );
+          return $this->redirectToRoute('app_index');
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -208,9 +204,7 @@ class QuizController extends AbstractController
             ->find($id);
 
         if (!$question) {
-            throw $this->createNotFoundException(
-                'No question found for id '.$id
-            );
+          return $this->redirectToRoute('app_index');
         }
         $r1 = $question ->getAnswers()[0];
         $r2 = $question ->getAnswers()[1];
@@ -321,9 +315,7 @@ class QuizController extends AbstractController
             ->find($id);
 
       if (!$quiz) {
-          throw $this->createNotFoundException(
-              'No quiz found for id '.$id
-          );
+        return $this->redirectToRoute('app_index');
       }
       $result = array();
       // Obliger d'envoyer les clés du tableau à partir du serveeur pour pouvoir itérer dessus en JS
@@ -387,6 +379,9 @@ class QuizController extends AbstractController
       $quiz = $this->getDoctrine()
          ->getRepository(Quiz::class)
          ->find($id);
+      if ($quiz == null) {
+        return $this->redirectToRoute('app_index');
+      }
       $entityManager->remove($quiz);
       $entityManager->flush();
       return $this->redirectToRoute('app_user_quiz');
@@ -401,6 +396,11 @@ class QuizController extends AbstractController
         $question = $this->getDoctrine()
         ->getRepository(Question::class)
         ->find($id);
+        if ($question == null) {
+          return $this->redirectToRoute('app_index');
+
+        }
+
       $quizId = $question ->getQuiz()->getId();
       $scores = $this->getDoctrine()
             ->getRepository(Score::class)
@@ -467,6 +467,9 @@ class QuizController extends AbstractController
         $quiz = $this->getDoctrine()
               ->getRepository(Quiz::class)
               ->find($id);
+        if ($quiz == null) {
+          return $this->redirectToRoute('app_index');
+        }
         $scores = $this->getDoctrine()
                 ->getRepository(Score::class)
                 ->findByQuiz($id);

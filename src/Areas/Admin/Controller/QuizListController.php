@@ -37,6 +37,9 @@ class QuizListController extends AbstractController
       $quiz = $this->getDoctrine()
          ->getRepository(Quiz::class)
          ->find($id);
+      if($quiz == null) {
+        return $this->redirectToRoute('app_index');
+      }
       $entityManager->remove($quiz);
       $entityManager->flush();
       return $this->redirectToRoute('app_quizList');
